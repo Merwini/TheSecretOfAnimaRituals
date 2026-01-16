@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>The Secret of Anima - Rituals</name>
+	<author>Nuff</author>
+	<packageId>tsoa.rituals</packageId>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>Rituals</description>
+	<modDependencies>
+		<li>
+			<packageId>tsoa.core</packageId>
+			<displayName>The Secret of Anima - Core</displayName>
+		</li>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+	</modDependencies>
+</ModMetaData>
