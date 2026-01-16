@@ -1,0 +1,10 @@
+Psychic Severing ritual - All pawns on map (or just ritual participants?) get temporary Hediff setting psychic sensitivity to 0. To outlast psychic drones.
+Treeskip ritual - Move the anima tree to a new location.
+Fever state ritual - Gives target pawn a fever hediff, greatly increases immunity gain speed, but fatal is not frequently tended.
+Pass into the Anima - Target pawn is removed as a colonist, stored in the anima tree (actually a GameComp). Can be summoned later with powerful buffs, but only for a limited duration
+Call from Anima - Summon a pawn stored in the anima tree for a limited duration with powerful buffs.
+
+Rite of Request - Summons a trade caravan - need to see how hard it is to set caravan type and/or faction
+Rite of Renewal - regrows a random limb (arm/leg level, digits/nose/etc only if limbs are all intact. If nothing is missing, can also replace a random bionic with natural organ)
+Rite of Eruption - creates a random ore vein on the map
+Rite of Fertility - gives temporary fertility hediff
