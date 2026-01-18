@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<tsoa.rituals.PsychicRitualDef_Severing>
+		<defName>TSOA_SeveringRitual</defName>
+		<label>Psychic severing</label>
+		<description>Temporarily severs the psychic attunement of all humanlike creatures on the map, to protect them from negative psychic forces like psychic drones. Performed properly, the effects will last for two days: just long enough to outlast most psychic drones. Performed improperly, the effects will last for much longer.</description>
+		<outcomeDescription>At the current ritual quality, the chance of successfully controlling the duration is {0}.</outcomeDescription>
+		<!--<iconPath>TODO</iconPath>-->
+		<!--<researchPrerequisite>TODO</researchPrerequisite>-->
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<chanterRole>ChanterAdvanced</chanterRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<failureDurationDays>4~6</failureDurationDays>
+	</tsoa.rituals.PsychicRitualDef_Severing>
+	
+</Defs>

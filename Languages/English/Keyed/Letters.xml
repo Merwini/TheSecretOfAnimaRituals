@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<TSOA_SeveringSuccess>{0_nameDef} has completed performing {RITUAL_definite} ritual successfully. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringSuccess>
+	<TSOA_SeveringFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringFailure>
+</LanguageData>

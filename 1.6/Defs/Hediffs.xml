@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<HediffDef>
+		<defName>TSOA_PsychicSevering</defName>
+		<hediffClass>HediffWithComps</hediffClass>
+		<label>psychic severing</label>
+		<description>An intentional severing from all psychic attunement, essentially causing psychic deafness.</description>
+		<isBad>false</isBad>
+		<tendable>false</tendable>
+		<alwaysShowSeverity>true</alwaysShowSeverity>
+		<maxSeverity>1</maxSeverity>
+		<stages>
+			<li>
+				<label>psychically severed</label>
+				<statFactors>
+					<PsychicSensitivity>0</PsychicSensitivity>
+				</statFactors>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.17</severityPerDay>
+				<showHoursToRecover>true</showHoursToRecover>
+			</li>
+		</comps>
+	</HediffDef>
+	
+</Defs>
