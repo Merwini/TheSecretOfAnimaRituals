@@ -49,6 +49,13 @@
 			<li>Plant_TreeAnima</li>
 		</ritualFocuses>
 		<targetsCell>true</targetsCell>
+		<relocateCurve>
+			<points>
+				<li>(0, 0)</li>
+				<li>(0.5, 15)</li>
+				<li>(1, 22)</li>
+			</points>
+		</relocateCurve>
 	</tsoa.rituals.PsychicRitualDef_Relocate>
 	
 </Defs>

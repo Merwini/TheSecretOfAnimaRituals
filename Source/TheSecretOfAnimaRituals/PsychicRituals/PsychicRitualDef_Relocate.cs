@@ -11,6 +11,8 @@ namespace tsoa.rituals
 {
     public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
     {
+        public SimpleCurve relocateCurve;
+
         public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
         {
             List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);

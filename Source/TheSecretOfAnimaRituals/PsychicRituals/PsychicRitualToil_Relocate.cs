@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
-using static UnityEngine.GraphicsBuffer;
 
 namespace tsoa.rituals
 {
@@ -31,36 +30,59 @@ namespace tsoa.rituals
         public override void Start(PsychicRitual psychicRitual, PsychicRitualGraph parent)
         {
             base.Start(psychicRitual, parent);
-            Pawn pawn = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
+
             float rand = Rand.Range(0f, 1f);
             float failureDegree = rand - psychicRitual.PowerPercent;
-            psychicRitual.ReleaseAllPawnsAndBuildings();
-            if (pawn != null)
+            if (failureDegree < 0f)
             {
-                ApplyOutcome(psychicRitual, pawn, failureDegree);
+                failureDegree = 0f;
+            }
+            int failureRadius = Mathf.RoundToInt(((PsychicRitualDef_Relocate)psychicRitual.def).relocateCurve.Evaluate(failureDegree));
+
+            psychicRitual.ReleaseAllPawnsAndBuildings();
+            if (ritualFocus != null && !ritualFocus.Destroyed && ritualFocus.Spawned)
+            {
+                ApplyOutcome(psychicRitual, failureRadius);
             }
         }
 
-        private void ApplyOutcome(PsychicRitual psychicRitual, Pawn invoker, float failureDegree)
+        private void ApplyOutcome(PsychicRitual psychicRitual, int failureRadius)
         {
+            Map map = ritualFocus.Map;
             IntVec3 destination;
-            if (failureDegree <= 0)
+            if (failureRadius <= 0)
             {
                 destination = targetCell;
             }
+            else if (CellFinder.TryFindRandomCellNear(targetCell, map, failureRadius,
+                cell =>
+                    map.fertilityGrid.FertilityAt(cell) > 0.08f &&
+                    cell.Standable(map) &&
+                    !cell.Fogged(map),
+                out IntVec3 result))
+            {
+                destination = result;
+            }
             else
             {
-                float failureDistance = failureDegree * 10f;
-                // Find a random empty cell approximately failureDistance away from targetCell
+                destination = ritualFocus.Position;
+                // TODO some sort of failure message indicating that the tree didn't move?
             }
-            EffecterDefOf.Skip_Entry.Spawn(ritualFocus.Position, ritualFocus.Map);
-            EffecterDefOf.SkipExit.Spawn(destination, ritualFocus.Map);
+
+            if (destination.IsValid)
+            {
+                EffecterDefOf.Skip_Entry.Spawn(ritualFocus.Position, map);
+                EffecterDefOf.Skip_Exit.Spawn(destination, map);
+                SkipUtility.SkipTo(ritualFocus, destination, map);
+            }
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Defs.Look(ref invokerRole, "invokerRole");
+            Scribe_Values.Look(ref targetCell, "targetCell", IntVec3.Invalid);
+            Scribe_References.Look(ref ritualFocus, "ritualFocus");
         }
     }
 }
