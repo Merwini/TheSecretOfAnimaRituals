@@ -117,96 +117,101 @@ namespace tsoa.rituals
         }
 
         [HarmonyPatch(typeof(PsychicRitualGizmo), nameof(PsychicRitualGizmo.InitializePsychicRitual))]
-        public static bool PsychicRitualGizmo_InitializePsychicRitual_Prefix(PsychicRitualDef_InvocationCircle psychicRitualDef, Thing target)
+        public static class PsychicRitualGizmo_InitializePsychicRitual_Prefix
         {
-            if (psychicRitualDef is not PsychicRitualDef_Unlocked unlockedRitual)
-                return true;
-
-            unlockedRitual.ritualFocus = target;
-
-            Map map = Find.CurrentMap;
-
-            if (unlockedRitual.targetsCell)
+            public static bool Prefix(PsychicRitualDef_InvocationCircle psychicRitualDef, Thing target)
             {
-                Find.Targeter.BeginTargeting(
-                TargetingParameters.ForCell(),
-                localTarget =>
+                Log.Warning("PsychicRitualGizmo_InitializePsychicRitual_Prefix called");
+                if (psychicRitualDef is not PsychicRitualDef_Unlocked unlockedRitual)
+                    return true;
+
+                unlockedRitual.ritualFocus = target;
+
+                Map map = Find.CurrentMap;
+
+                if (unlockedRitual.targetsCell)
                 {
-                    IntVec3 cell = localTarget.Cell;
-                    if (!cell.InBounds(map))
-                        return;
-
-                    unlockedRitual.targetCell = cell;
-
-                    OriginalActions();
-                });
-
-                return false;
-            }
-            else if (unlockedRitual.targetsPawn)
-            {
-                Find.Targeter.BeginTargeting(
-                new TargetingParameters
-                {
-                    canTargetPawns = true,
-                    canTargetHumans = true,
-                    canTargetAnimals = true,
-                    canTargetBuildings = false,
-                    validator = t => t is Pawn
-                },
-                localTarget =>
-                {
-                    Pawn pawn = localTarget.Pawn;
-                    if (pawn == null)
-                        return;
-
-                    unlockedRitual.targetPawn = pawn;
-
-                    OriginalActions();
-                });
-
-                return false;
-            }
-            else if (unlockedRitual.targetsThingOfDef != null)
-            {
-                ThingDef wantedDef = unlockedRitual.targetsThingOfDef;
-
-                Find.Targeter.BeginTargeting(
-                    new TargetingParameters
-                    {
-                        canTargetBuildings = true,
-                        canTargetItems = true,
-                        validator = t =>
-                            t.Thing != null &&
-                            t.Thing.def == wantedDef &&
-                            t.Thing.Spawned &&
-                            t.Thing.Map == map
-                    },
+                    Log.Warning("targets cell ritual selected");
+                    Find.Targeter.BeginTargeting(
+                    TargetingParameters.ForCell(),
                     localTarget =>
                     {
-                        Thing thing = localTarget.Thing;
-                        if (thing == null)
+                        IntVec3 cell = localTarget.Cell;
+                        if (!cell.InBounds(map))
                             return;
 
-                        unlockedRitual.targetThing = thing;
+                        unlockedRitual.targetCell = cell;
 
                         OriginalActions();
                     });
 
-                return false;
-            }
+                    return false;
+                }
+                else if (unlockedRitual.targetsPawn)
+                {
+                    Find.Targeter.BeginTargeting(
+                    new TargetingParameters
+                    {
+                        canTargetPawns = true,
+                        canTargetHumans = true,
+                        canTargetAnimals = true,
+                        canTargetBuildings = false,
+                        validator = t => t.Thing is Pawn
+                    },
+                    localTarget =>
+                    {
+                        Pawn pawn = localTarget.Pawn;
+                        if (pawn == null)
+                            return;
 
-            // implied else
-            return true;
+                        unlockedRitual.targetPawn = pawn;
 
-            void OriginalActions()
-            {
-                TargetInfo target2 = new TargetInfo(target);
-                PsychicRitualRoleAssignments assignments = psychicRitualDef.BuildRoleAssignments(target2);
-                PsychicRitualCandidatePool candidatePool = psychicRitualDef.FindCandidatePool();
-                Map currentMap = Find.CurrentMap;
-                psychicRitualDef.InitializeCast(currentMap);
-                Find.WindowStack.Add(new Dialog_BeginPsychicRitual(psychicRitualDef, candidatePool, assignments, currentMap));
+                        OriginalActions();
+                    });
+
+                    return false;
+                }
+                else if (unlockedRitual.targetsThingOfDef != null)
+                {
+                    ThingDef wantedDef = unlockedRitual.targetsThingOfDef;
+
+                    Find.Targeter.BeginTargeting(
+                        new TargetingParameters
+                        {
+                            canTargetBuildings = true,
+                            canTargetItems = true,
+                            validator = t =>
+                                t.Thing != null &&
+                                t.Thing.def == wantedDef &&
+                                t.Thing.Spawned &&
+                                t.Thing.Map == map
+                        },
+                        localTarget =>
+                        {
+                            Thing thing = localTarget.Thing;
+                            if (thing == null)
+                                return;
+
+                            unlockedRitual.targetThing = thing;
+
+                            OriginalActions();
+                        });
+
+                    return false;
+                }
+
+                // implied else
+                return true;
+
+                void OriginalActions()
+                {
+                    TargetInfo target2 = new TargetInfo(target);
+                    PsychicRitualRoleAssignments assignments = psychicRitualDef.BuildRoleAssignments(target2);
+                    PsychicRitualCandidatePool candidatePool = psychicRitualDef.FindCandidatePool();
+                    Map currentMap = Find.CurrentMap;
+                    psychicRitualDef.InitializeCast(currentMap);
+                    Find.WindowStack.Add(new Dialog_BeginPsychicRitual(psychicRitualDef, candidatePool, assignments, currentMap));
+                }
             }
         }
     }
