@@ -10,7 +10,7 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals;
 
-public class PsychicRitualDef_Severing : PsychicRitualDef_LocationUnlocked
+public class PsychicRitualDef_Severing : PsychicRitualDef_Unlocked
 {
     public FloatRange failureDurationDays;
 

@@ -9,9 +9,18 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals
 {
-    public class PsychicRitualDef_LocationUnlocked : PsychicRitualDef_InvocationCircle
+    public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
     {
         public List<ThingDef> ritualFocuses;
+
+        public bool targetsCell;
+        public IntVec3 targetCell;
+
+        public bool targetsPawn;
+        public Pawn targetPawn;
+
+        public ThingDef targetsThingOfDef;
+        public Thing targetThing;
 
         public override void ResolveReferences()
         {
@@ -21,6 +30,11 @@ namespace tsoa.rituals
             {
                 ritualFocuses = new List<ThingDef>();
                 Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
+            }
+
+            if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
+            {
+                Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
             }
         }
     }
