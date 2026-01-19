@@ -72,13 +72,11 @@ namespace tsoa.rituals
                     if (orderByIndex == -1 && codes[i].opcode == OpCodes.Call && codes[i].operand.ToString().Contains("OrderBy"))
                     {
                         orderByIndex = i;
-                        Log.Message(codes[i].ToString());
                     }
 
                     if (orderByIndex != -1 && codes[i].opcode == OpCodes.Stloc_2)
                     {
                         stlocIndex = i;
-                        Log.Message(codes[i].ToString());
                         break;
                     }
                 }
@@ -123,6 +121,8 @@ namespace tsoa.rituals
         {
             if (psychicRitualDef is not PsychicRitualDef_Unlocked unlockedRitual)
                 return true;
+
+            unlockedRitual.ritualFocus = target;
 
             Map map = Find.CurrentMap;
 

@@ -11,7 +11,8 @@ namespace tsoa.rituals
 {
     public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
     {
-        public List<ThingDef> ritualFocuses;
+        public List<ThingDef> ritualFocuses; // List of allowed ritual focuses for this ritual
+        public Thing ritualFocus; // The actual focus used in the ritual instance
 
         public bool targetsCell;
         public IntVec3 targetCell;
@@ -21,6 +22,7 @@ namespace tsoa.rituals
 
         public ThingDef targetsThingOfDef;
         public Thing targetThing;
+
 
         public override void ResolveReferences()
         {

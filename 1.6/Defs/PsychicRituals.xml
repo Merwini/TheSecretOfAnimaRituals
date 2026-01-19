@@ -25,5 +25,30 @@
 		</ritualFocuses>
 		<failureDurationDays>4~6</failureDurationDays>
 	</tsoa.rituals.PsychicRitualDef_Severing>
+
+	<tsoa.rituals.PsychicRitualDef_Relocate>
+		<defName>TSOA_RelocationRitual</defName>
+		<label>Tree relocation</label>
+		<description>Relocates the anima tree to a new location. If the ritual is successful, the tree will move to the desired location. If it is unsuccessful, it will end up at a random location near the desired target.</description>
+		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
+		<!--<iconPath>TODO</iconPath>-->
+		<!--<researchPrerequisite>TODO</researchPrerequisite>-->
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<chanterRole>ChanterAdvanced</chanterRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<targetsCell>true</targetsCell>
+	</tsoa.rituals.PsychicRitualDef_Relocate>
 	
 </Defs>
