@@ -104,7 +104,7 @@ namespace tsoa.rituals
             return unfiltered
                 .Where(ritualDef =>
                 {
-                    PsychicRitualDef_LocationUnlocked locationUnlocked = ritualDef as PsychicRitualDef_LocationUnlocked;
+                    PsychicRitualDef_Unlocked locationUnlocked = ritualDef as PsychicRitualDef_Unlocked;
 
                     // Case: it's a psychic ritual spot and the ritual is NOT location unlocked, or is and the target is psychic ritual spot
                     if (isPsychicRitualSpot)
@@ -116,6 +116,98 @@ namespace tsoa.rituals
                     return locationUnlocked != null && locationUnlocked.ritualFocuses.Contains(target.def);
                 })
                 .OrderBy(rd => rd.label);
+        }
+
+        [HarmonyPatch(typeof(PsychicRitualGizmo), nameof(PsychicRitualGizmo.InitializePsychicRitual))]
+        public static bool PsychicRitualGizmo_InitializePsychicRitual_Prefix(PsychicRitualDef_InvocationCircle psychicRitualDef, Thing target)
+        {
+            if (psychicRitualDef is not PsychicRitualDef_Unlocked unlockedRitual)
+                return true;
+
+            Map map = Find.CurrentMap;
+
+            if (unlockedRitual.targetsCell)
+            {
+                Find.Targeter.BeginTargeting(
+                TargetingParameters.ForCell(),
+                localTarget =>
+                {
+                    IntVec3 cell = localTarget.Cell;
+                    if (!cell.InBounds(map))
+                        return;
+
+                    unlockedRitual.targetCell = cell;
+
+                    OriginalActions();
+                });
+
+                return false;
+            }
+            else if (unlockedRitual.targetsPawn)
+            {
+                Find.Targeter.BeginTargeting(
+                new TargetingParameters
+                {
+                    canTargetPawns = true,
+                    canTargetHumans = true,
+                    canTargetAnimals = true,
+                    canTargetBuildings = false,
+                    validator = t => t is Pawn
+                },
+                localTarget =>
+                {
+                    Pawn pawn = localTarget.Pawn;
+                    if (pawn == null)
+                        return;
+
+                    unlockedRitual.targetPawn = pawn;
+
+                    OriginalActions();
+                });
+
+                return false;
+            }
+            else if (unlockedRitual.targetsThingOfDef != null)
+            {
+                ThingDef wantedDef = unlockedRitual.targetsThingOfDef;
+
+                Find.Targeter.BeginTargeting(
+                    new TargetingParameters
+                    {
+                        canTargetBuildings = true,
+                        canTargetItems = true,
+                        validator = t =>
+                            t.Thing != null &&
+                            t.Thing.def == wantedDef &&
+                            t.Thing.Spawned &&
+                            t.Thing.Map == map
+                    },
+                    localTarget =>
+                    {
+                        Thing thing = localTarget.Thing;
+                        if (thing == null)
+                            return;
+
+                        unlockedRitual.targetThing = thing;
+
+                        OriginalActions();
+                    });
+
+                return false;
+            }
+
+            // implied else
+            return true;
+
+            void OriginalActions()
+            {
+                TargetInfo target2 = new TargetInfo(target);
+                PsychicRitualRoleAssignments assignments = psychicRitualDef.BuildRoleAssignments(target2);
+                PsychicRitualCandidatePool candidatePool = psychicRitualDef.FindCandidatePool();
+                Map currentMap = Find.CurrentMap;
+                psychicRitualDef.InitializeCast(currentMap);
+                Find.WindowStack.Add(new Dialog_BeginPsychicRitual(psychicRitualDef, candidatePool, assignments, currentMap));
+            }
         }
     }
 }
