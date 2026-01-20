@@ -1,5 +1,4 @@
-﻿using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +8,12 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals
 {
-    public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
+    public class PsychicRitualDef_Fever : PsychicRitualDef_Unlocked
     {
-        public SimpleCurve relocateCurve;
-
-        public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
+        public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph parent)
         {
-            List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
-            list.Add(new PsychicRitualToil_Relocate(InvokerRole, targetCell, ritualFocus));
-
+            List<PsychicRitualToil> list = base.CreateToils(psychicRitual, parent);
+            list.Add(new PsychicRitualToil_Fever());
             return list;
         }
 
