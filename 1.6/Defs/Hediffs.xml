@@ -25,5 +25,59 @@
 			</li>
 		</comps>
 	</HediffDef>
-	
+
+	<HediffDef Abstract="True" Name="TSOA_PsychicFeverBase">
+		<hediffClass>HediffWithComps</hediffClass>
+		<label>psychic fever</label>
+		<description>A psychically-induced fever that supercharges immune response, but will cause the patient to overheat and die if not tended frequently.</description>
+		<tendable>true</tendable>
+		<isBad>true</isBad>
+		<initialSeverity>0</initialSeverity>
+		<lethalSeverity>1.0</lethalSeverity>
+		<stages>
+			<li>
+				<label>psychic fever</label>
+				<statFactors>
+					<ImmunityGainSpeed>2.0</ImmunityGainSpeed>
+				</statFactors>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.5</setMax>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_TendDuration">
+				<baseTendDurationHours>3</baseTendDurationHours>
+				<tendOverlapHours>0.5</tendOverlapHours>
+			</li>
+		</comps>
+	</HediffDef>
+
+	<HediffDef ParentName="TSOA_PsychicFeverBase">
+		<defName>TSOA_PsychicFever_Success</defName>
+		<label>psychic fever</label>
+		<comps>
+			<li Class="tsoa.rituals.HediffCompProperties_PsychicFever">
+				<hoursToLethal>6</hoursToLethal>
+				<severityAfterTend>0</severityAfterTend>
+				<durationDays>2</durationDays>
+			</li>
+		</comps>
+	</HediffDef>
+
+	<HediffDef ParentName="TSOA_PsychicFeverBase">
+		<defName>TSOA_PsychicFever_Failure</defName>
+		<label>psychic fever (unstable)</label>
+		<comps>
+			<li Class="tsoa.rituals.HediffCompProperties_PsychicFever">
+				<hoursToLethal>6</hoursToLethal>
+				<severityAfterTend>0</severityAfterTend>
+				<durationDaysRandom>4~6</durationDaysRandom>
+			</li>
+		</comps>
+	</HediffDef>
+
 </Defs>
