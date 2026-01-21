@@ -121,7 +121,6 @@ namespace tsoa.rituals
         {
             public static bool Prefix(PsychicRitualDef_InvocationCircle psychicRitualDef, Thing target)
             {
-                Log.Warning("PsychicRitualGizmo_InitializePsychicRitual_Prefix called");
                 if (psychicRitualDef is not PsychicRitualDef_Unlocked unlockedRitual)
                     return true;
 
@@ -131,7 +130,6 @@ namespace tsoa.rituals
 
                 if (unlockedRitual.targetsCell)
                 {
-                    Log.Warning("targets cell ritual selected");
                     Find.Targeter.BeginTargeting(
                     TargetingParameters.ForCell(),
                     localTarget =>
