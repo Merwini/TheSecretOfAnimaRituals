@@ -14,5 +14,9 @@ namespace tsoa.rituals
         public static ThingDef PsychicRitualSpot;
 
         public static HediffDef TSOA_PsychicSevering;
+
+        public static HediffDef TSOA_PsychicFever_Success;
+
+        public static HediffDef TSOA_PsychicFever_Failure;
     }
 }

@@ -2,7 +2,7 @@
 <Defs>
 	<PsychicRitualRoleDef>
 		<defName>TSOA_FeverTarget</defName>
-		<label>target</label>
+		<label>feverant</label>
 		<allowedCount>1</allowedCount>
 		<allowedConditions>Default, Downed, Prisoner, Sleeping, IdeoUnwilling</allowedConditions>
 		<applyPowerOffset>false</applyPowerOffset>
