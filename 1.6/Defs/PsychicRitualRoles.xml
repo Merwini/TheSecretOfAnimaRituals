@@ -7,5 +7,7 @@
 		<allowedConditions>Default, Downed, Prisoner, Sleeping, IdeoUnwilling</allowedConditions>
 		<applyPowerOffset>false</applyPowerOffset>
 		<removeOnLost>false</removeOnLost>
+		<allowedCount>0~6</allowedCount>
 	</PsychicRitualRoleDef>
+	
 </Defs>

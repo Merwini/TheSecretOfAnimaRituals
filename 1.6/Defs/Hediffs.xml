@@ -36,7 +36,6 @@
 		<lethalSeverity>1.0</lethalSeverity>
 		<stages>
 			<li>
-				<label>psychic fever</label>
 				<statFactors>
 					<ImmunityGainSpeed>2.0</ImmunityGainSpeed>
 				</statFactors>
@@ -46,6 +45,9 @@
 						<setMax>0.5</setMax>
 					</li>
 				</capMods>
+				<disabledWorkTags>
+					<li>Caring</li>
+				</disabledWorkTags>
 			</li>
 		</stages>
 		<comps>

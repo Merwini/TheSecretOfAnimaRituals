@@ -13,7 +13,7 @@ namespace tsoa.rituals
         public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph parent)
         {
             List<PsychicRitualToil> list = base.CreateToils(psychicRitual, parent);
-            list.Add(new PsychicRitualToil_Fever());
+            list.Add(new PsychicRitualToil_Fever(psychicRitual));
             return list;
         }
 
