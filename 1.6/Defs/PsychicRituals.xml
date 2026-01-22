@@ -88,5 +88,36 @@
 			</points>
 		</successCurve>
 	</tsoa.rituals.PsychicRitualDef_Fever>
+
+	<tsoa.rituals.PsychicRitualDef_Renewal>
+		<defName>TSOA_RenewalRitual</defName>
+		<label>somatic renewal</label>
+		<description>.</description>
+		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
+		<!--<iconPath>TODO</iconPath>-->
+		<!--<researchPrerequisite>TODO</researchPrerequisite>-->
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<targetRole>TSOA_RenewalTarget</targetRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<successCurve>
+			<points>
+				<li>(0, 0.25)</li>
+				<li>(0.5, 0.75)</li>
+				<li>(1, 1)</li>
+			</points>
+		</successCurve>
+	</tsoa.rituals.PsychicRitualDef_Renewal>
 	
 </Defs>

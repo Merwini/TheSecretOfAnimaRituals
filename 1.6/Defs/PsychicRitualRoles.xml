@@ -9,5 +9,15 @@
 		<removeOnLost>false</removeOnLost>
 		<allowedCount>0~6</allowedCount>
 	</PsychicRitualRoleDef>
+
+	<PsychicRitualRoleDef>
+		<defName>TSOA_RenewalTarget</defName>
+		<label>target</label>
+		<allowedCount>1</allowedCount>
+		<allowedConditions>Default, Downed, Prisoner, Sleeping, IdeoUnwilling</allowedConditions>
+		<applyPowerOffset>false</applyPowerOffset>
+		<removeOnLost>false</removeOnLost>
+		<allowedCount>1</allowedCount>
+	</PsychicRitualRoleDef>
 	
 </Defs>
