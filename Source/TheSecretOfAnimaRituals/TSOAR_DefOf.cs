@@ -18,5 +18,7 @@ namespace tsoa.rituals
         public static HediffDef TSOA_PsychicFever_Success;
 
         public static HediffDef TSOA_PsychicFever_Failure;
+
+        public static HediffDef TSOA_RegrowingPart;
     }
 }

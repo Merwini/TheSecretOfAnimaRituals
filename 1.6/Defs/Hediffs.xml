@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+	<!-- Severing -->
 	<HediffDef>
 		<defName>TSOA_PsychicSevering</defName>
 		<hediffClass>HediffWithComps</hediffClass>
@@ -26,6 +27,7 @@
 		</comps>
 	</HediffDef>
 
+	<!-- Fever -->
 	<HediffDef Abstract="True" Name="TSOA_PsychicFeverBase">
 		<hediffClass>HediffWithComps</hediffClass>
 		<label>psychic fever</label>
@@ -82,4 +84,43 @@
 		</comps>
 	</HediffDef>
 
+	<!-- Regrowing -->
+	<HediffDef>
+		<defName>TSOA_RegrowingPart</defName>
+		<label>regrowing</label>
+		<description>A body part is regrowing. It will regain function over time.</description>
+		<hediffClass>tsoa.rituals.Hediff_RegrowingPart</hediffClass>
+		<isBad>false</isBad>
+		<tendable>false</tendable>
+		<displayWound>false</displayWound>
+
+		<stages>
+			<li>
+				<label>sprouting</label>
+				<minSeverity>0.0</minSeverity>
+				<partEfficiencyOffset>-1</partEfficiencyOffset>
+			</li>
+			<li>
+				<label>budding</label>
+				<minSeverity>0.25</minSeverity>
+				<partEfficiencyOffset>-0.80</partEfficiencyOffset>
+			</li>
+			<li>
+				<label>growing</label>
+				<minSeverity>0.5</minSeverity>
+				<partEfficiencyOffset>-0.50</partEfficiencyOffset>
+			</li>
+			<li>
+				<label>ripening</label>
+				<minSeverity>0.75</minSeverity>
+				<partEfficiencyOffset>-0.25</partEfficiencyOffset>
+			</li>
+			<li>
+				<label>bugged</label>
+				<minSeverity>1</minSeverity>
+				<partEfficiencyOffset>0</partEfficiencyOffset>
+			</li>
+		</stages>
+	</HediffDef>
+	
 </Defs>

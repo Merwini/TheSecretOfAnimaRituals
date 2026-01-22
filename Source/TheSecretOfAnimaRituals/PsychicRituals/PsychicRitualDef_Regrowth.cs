@@ -6,18 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
-using static UnityEngine.GraphicsBuffer;
 
 namespace tsoa.rituals
 {
-    public class PsychicRitualDef_Renewal : PsychicRitualDef_Unlocked
+    public class PsychicRitualDef_Regrowth : PsychicRitualDef_Unlocked
     {
-        SimpleCurve successCurve;
+        public SimpleCurve successCurve;
 
         public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
         {
             List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
-            list.Add(new PsychicRitualToil_Renewal(InvokerRole, TargetRole));
+            list.Add(new PsychicRitualToil_Regrowth(InvokerRole, TargetRole));
             return list;
         }
 
@@ -29,9 +28,9 @@ namespace tsoa.rituals
             }
             Pawn target = assignments.FirstAssignedPawn(TargetRole);
             
-            if ()
+            if (!HasPermanentInjuries(target))
             {
-                yield return "NotEnoughAnimals".Translate();
+                yield return "TSOA_RegrowthRitualBlocker".Translate();
             }
         }
 
@@ -40,9 +39,21 @@ namespace tsoa.rituals
             return outcomeDescription.Formatted(successCurve.Evaluate(qualityRange.min).ToStringPercent());
         }
 
-        public void ReturnMissingBodyPart(Pawn pawn)
+        public bool HasPermanentInjuries(Pawn pawn)
         {
-            // TODO
+            if (pawn?.health?.hediffSet == null)
+                return false;
+
+            foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
+            {
+                if (hediff is Hediff_MissingPart mp)
+                    return true;
+
+                if (hediff is Hediff_Injury injury && injury.IsPermanent())
+                    return true;
+            }
+
+            return false;
         }
     }
 }

@@ -11,10 +11,10 @@
 	</PsychicRitualRoleDef>
 
 	<PsychicRitualRoleDef>
-		<defName>TSOA_RenewalTarget</defName>
+		<defName>TSOA_RegrowthTarget</defName>
 		<label>target</label>
 		<allowedCount>1</allowedCount>
-		<allowedConditions>Default, Downed, Prisoner, Sleeping, IdeoUnwilling</allowedConditions>
+		<allowedConditions>Default, Downed, Sleeping, IdeoUnwilling</allowedConditions>
 		<applyPowerOffset>false</applyPowerOffset>
 		<removeOnLost>false</removeOnLost>
 		<allowedCount>1</allowedCount>

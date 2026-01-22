@@ -89,10 +89,10 @@
 		</successCurve>
 	</tsoa.rituals.PsychicRitualDef_Fever>
 
-	<tsoa.rituals.PsychicRitualDef_Renewal>
-		<defName>TSOA_RenewalRitual</defName>
-		<label>somatic renewal</label>
-		<description>.</description>
+	<tsoa.rituals.PsychicRitualDef_Regrowth>
+		<defName>TSOA_RegrowthRitual</defName>
+		<label>somatic regrowth</label>
+		<description>Induces the target's body to begin regrowing a lost or permanently damaged body part. The body part will regrow over a period of days or weeks. The invoker will attempt to control the growth, but if the ritual goes wrong it may induce uncontrolled growth in another part of the body, resulting in a carcinoma.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
 		<!--<iconPath>TODO</iconPath>-->
 		<!--<researchPrerequisite>TODO</researchPrerequisite>-->
@@ -107,7 +107,7 @@
 			<count>10</count>
 		</requiredOffering>
 		<cooldownHours>120</cooldownHours>
-		<targetRole>TSOA_RenewalTarget</targetRole>
+		<targetRole>TSOA_RegrowthTarget</targetRole>
 		<ritualFocuses>
 			<li>Plant_TreeAnima</li>
 		</ritualFocuses>
@@ -118,6 +118,6 @@
 				<li>(1, 1)</li>
 			</points>
 		</successCurve>
-	</tsoa.rituals.PsychicRitualDef_Renewal>
-	
+	</tsoa.rituals.PsychicRitualDef_Regrowth>
+
 </Defs>
