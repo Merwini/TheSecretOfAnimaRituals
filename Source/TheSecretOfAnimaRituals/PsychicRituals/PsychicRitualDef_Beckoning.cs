@@ -15,7 +15,7 @@ namespace tsoa.rituals
     {
         public SimpleCurve successCurve;
         public SimpleCurve successCurveAnyTrader;
-        public string anyTraderOptionString = "any trader";
+        public string anyTraderOptionString = "TSOA_BeckoningRitualAnyTrader".Translate();
 
         private TraderKindDef chosenTraderKind;
         private List<Faction> eligibleFactions = new List<Faction>();
