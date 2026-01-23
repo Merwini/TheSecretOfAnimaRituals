@@ -25,9 +25,12 @@ namespace tsoa.rituals
             get
             {
                 List<string> options = new List<string>();
-                foreach (var kind in DefDatabase<TraderKindDef>.AllDefs)
+                if (advancedResearchProject.IsFinished)
                 {
-                    options.Add(kind.label);
+                    foreach (var kind in DefDatabase<TraderKindDef>.AllDefs)
+                    {
+                        options.Add(kind.label);
+                    }
                 }
 
                 List<string> filteredOptions = new List<string>();

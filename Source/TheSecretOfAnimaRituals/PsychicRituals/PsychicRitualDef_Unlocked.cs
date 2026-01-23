@@ -14,6 +14,8 @@ namespace tsoa.rituals
         public List<ThingDef> ritualFocuses; // List of allowed ritual focuses for this ritual
         public Thing ritualFocus; // The actual focus used in the ritual instance
 
+        public ResearchProjectDef advancedResearchProject;
+
         public bool targetsCell;
         public IntVec3 targetCell;
 

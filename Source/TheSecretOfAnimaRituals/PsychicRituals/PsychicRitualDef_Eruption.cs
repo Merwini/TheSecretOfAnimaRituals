@@ -24,8 +24,7 @@ namespace tsoa.rituals
                 List<string> options = new List<string>();
                 options.Add(anyOreOptionString);
 
-                //TODO if (researchProjectDef.IsFinished)
-                if (true)
+                if (advancedResearchProject.IsFinished)
                 {
                     foreach (var ore in DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock))
                     {
