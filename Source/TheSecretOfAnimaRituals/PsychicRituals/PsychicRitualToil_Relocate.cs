@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
+using static Verse.PatchOperation;
 
 namespace tsoa.rituals
 {
@@ -38,15 +39,17 @@ namespace tsoa.rituals
                 failureDegree = 0f;
             }
             int failureRadius = Mathf.RoundToInt(((PsychicRitualDef_Relocate)psychicRitual.def).relocateCurve.Evaluate(failureDegree));
+            Pawn invoker = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
 
             psychicRitual.ReleaseAllPawnsAndBuildings();
+
             if (ritualFocus != null && !ritualFocus.Destroyed && ritualFocus.Spawned)
             {
-                ApplyOutcome(psychicRitual, failureRadius);
+                ApplyOutcome(psychicRitual, failureRadius, invoker);
             }
         }
 
-        private void ApplyOutcome(PsychicRitual psychicRitual, int failureRadius)
+        private void ApplyOutcome(PsychicRitual psychicRitual, int failureRadius, Pawn invoker)
         {
             Map map = ritualFocus.Map;
             IntVec3 destination;
@@ -74,6 +77,7 @@ namespace tsoa.rituals
                 EffecterDefOf.Skip_Entry.Spawn(ritualFocus.Position, map);
                 EffecterDefOf.Skip_Exit.Spawn(destination, map);
                 SkipUtility.SkipTo(ritualFocus, destination, map);
+                Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), (failureRadius == 0 ? "TSOA_RelocateSuccess" : "TSOA_RelocateFailure").Translate(invoker, psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
             }
         }
 

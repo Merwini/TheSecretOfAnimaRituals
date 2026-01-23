@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+	<TSOA_RelocateSuccess>{0_nameDef} has completed performing {RITUAL_definite} ritual successfully. The anima tree has been skipgated to the new location.</TSOA_RelocateSuccess>
+	<TSOA_RelocateFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. The anima tree has been skipgated, but not to the desired location.</TSOA_RelocateFailure>
+	
 	<TSOA_SeveringSuccess>{0_nameDef} has completed performing {RITUAL_definite} ritual successfully. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringSuccess>
 	<TSOA_SeveringFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringFailure>
 
