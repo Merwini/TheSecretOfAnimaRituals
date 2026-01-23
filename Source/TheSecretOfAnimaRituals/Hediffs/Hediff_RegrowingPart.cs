@@ -40,7 +40,6 @@ namespace tsoa.rituals
             }
 
             Severity = 1f - ((float)ticksRemaining / totalTicks);
-            Log.Message($"{pawn} sev={Severity:F3} stage={CurStageIndex} min={CurStage.minSeverity}");
             if (ticksRemaining == 0)
             {
                 FinishRegrow();
