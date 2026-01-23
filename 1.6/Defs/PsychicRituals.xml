@@ -91,7 +91,7 @@
 
 	<tsoa.rituals.PsychicRitualDef_Regrowth>
 		<defName>TSOA_RegrowthRitual</defName>
-		<label>somatic regrowth</label>
+		<label>Somatic regrowth</label>
 		<description>Induces the target's body to begin regrowing a lost or permanently damaged body part. The body part will regrow over a period of days or weeks. The invoker will attempt to control the growth, but if the ritual goes wrong it may induce uncontrolled growth in another part of the body, resulting in a carcinoma.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
 		<!--<iconPath>TODO</iconPath>-->
@@ -122,7 +122,7 @@
 
 	<tsoa.rituals.PsychicRitualDef_Beckoning>
 		<defName>TSOA_BeckoningRitual</defName>
-		<label>psychic beckoning</label>
+		<label>Psychic beckoning</label>
 		<description>Psychically beckons across great distances, trying to influence someone to visit your colony. If the ritual is successful, it will be a friendly trader. With increased difficulty, you can even choose what kind of trader it will be that receives the beckoning. However, if the ritual is unsuccessful, it will be a group that means to do you harm.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
 		<!--<iconPath>TODO</iconPath>-->
