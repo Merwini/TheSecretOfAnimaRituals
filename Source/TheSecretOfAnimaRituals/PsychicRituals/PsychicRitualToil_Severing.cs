@@ -46,11 +46,11 @@ namespace tsoa.rituals
                 Hediff hediff = HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_PsychicSevering, humanLike);
                 if (positiveOutcome)
                 {
-                    hediff.Severity = 2 * severityPerDay;
+                    hediff.Severity = 2 * -severityPerDay;
                 }
                 else
                 {
-                    hediff.Severity = Rand.Range(failureDurationDays.min * severityPerDay, failureDurationDays.max * severityPerDay);
+                    hediff.Severity = Rand.Range(failureDurationDays.min * severityPerDay, failureDurationDays.max * -severityPerDay);
                 }
                 Hediff existing = humanLike.health.hediffSet.GetFirstHediffOfDef(TSOAR_DefOf.TSOA_PsychicSevering);
                 if (existing != null)
