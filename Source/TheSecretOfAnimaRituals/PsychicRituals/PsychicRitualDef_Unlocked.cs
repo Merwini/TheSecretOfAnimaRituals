@@ -23,6 +23,14 @@ namespace tsoa.rituals
         public ThingDef targetsThingOfDef;
         public Thing targetThing;
 
+        public bool gizmoMakesFloatMenu;
+        public virtual List<string> FloatMenuOptionStrings => null;
+        public string selectedFloatMenuOptionString = null;
+
+        public virtual void HandleFloatMenuOption(string option)
+        {
+        }
+
 
         public override void ResolveReferences()
         {

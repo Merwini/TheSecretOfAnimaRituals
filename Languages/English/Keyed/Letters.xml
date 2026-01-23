@@ -6,4 +6,7 @@
 
 	<TSOA_FeverSuccess>{0_nameDef} has completed performing {RITUAL_definite} ritual successfully. For the next {1} days, the ritual targets will experience psychic fever.</TSOA_FeverSuccess>
 	<TSOA_FeverFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. For the next {1} days, the ritual targets will experience psychic fever.</TSOA_FeverFailure>
+
+	<TSOA_BeckoningSuccess>{0_nameDef} has completed performing the {RITUAL_definite} ritual successfully. In a day or two, the desired trade caravan will arrive.</TSOA_BeckoningSuccess>
+	<TSOA_BeckoningFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual, and called a hostile group instead. In a day or two, a raid will arrive.</TSOA_BeckoningFailure>
 </LanguageData>

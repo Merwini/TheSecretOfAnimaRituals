@@ -197,6 +197,28 @@ namespace tsoa.rituals
 
                     return false;
                 }
+                else if (unlockedRitual.gizmoMakesFloatMenu)
+                {
+                    List<FloatMenuOption> opts = new List<FloatMenuOption>();
+
+                    foreach (string item in unlockedRitual.FloatMenuOptionStrings)
+                    {
+                        opts.Add(new FloatMenuOption(
+                            item,
+                            //() => unlockedRitual.HandleFloatMenuOption(item)));
+                            () =>
+                            {
+                                unlockedRitual.selectedFloatMenuOptionString = item;
+                                
+                                OriginalActions();
+                            }
+                            ));
+                    }
+
+                    Find.WindowStack.Add(new FloatMenu(opts));
+
+                    return false;
+                }
 
                 // implied else
                 return true;
