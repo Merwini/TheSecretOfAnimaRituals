@@ -13,6 +13,11 @@ namespace tsoa.rituals
     {
         public SimpleCurve relocateCurve;
 
+        public override bool ExtraCellValidator(IntVec3 cell, Map map)
+        {
+            return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin;
+        }
+
         public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
         {
             List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);

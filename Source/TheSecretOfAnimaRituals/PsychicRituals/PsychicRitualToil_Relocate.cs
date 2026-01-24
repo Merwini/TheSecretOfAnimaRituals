@@ -59,9 +59,8 @@ namespace tsoa.rituals
             }
             else if (CellFinder.TryFindRandomCellNear(targetCell, map, failureRadius,
                 cell =>
-                    map.fertilityGrid.FertilityAt(cell) > 0.08f &&
-                    cell.Standable(map) &&
-                    !cell.Fogged(map),
+                    map.fertilityGrid.FertilityAt(cell) > ThingDefOf.Plant_TreeAnima.plant.fertilityMin &&
+                    cell.Standable(map),
                 out IntVec3 result))
             {
                 destination = result;
