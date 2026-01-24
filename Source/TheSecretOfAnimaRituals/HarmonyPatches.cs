@@ -131,14 +131,20 @@ namespace tsoa.rituals
                 if (unlockedRitual.targetsCell)
                 {
                     Find.Targeter.BeginTargeting(
-                    TargetingParameters.ForCell(),
+                    new TargetingParameters
+                    {
+                        canTargetLocations = true,
+                        canTargetBuildings = false,
+                        canTargetPawns = false,
+                        validator = t =>
+                        {
+                            IntVec3 cell = t.Cell;
+                            return cell.InBounds(map) && unlockedRitual.ExtraCellValidator(cell, t.Map);
+                        }
+                    },
                     localTarget =>
                     {
-                        IntVec3 cell = localTarget.Cell;
-                        if (!cell.InBounds(map))
-                            return;
-
-                        unlockedRitual.targetCell = cell;
+                        unlockedRitual.targetCell = localTarget.Cell;
 
                         OriginalActions();
                     });
@@ -151,10 +157,10 @@ namespace tsoa.rituals
                     new TargetingParameters
                     {
                         canTargetPawns = true,
-                        canTargetHumans = true,
-                        canTargetAnimals = true,
                         canTargetBuildings = false,
-                        validator = t => t.Thing is Pawn
+                        validator = t => 
+                            t.Thing is Pawn &&
+                            unlockedRitual.ExtraThingValidator(t.Thing)
                     },
                     localTarget =>
                     {
@@ -176,21 +182,21 @@ namespace tsoa.rituals
                     Find.Targeter.BeginTargeting(
                         new TargetingParameters
                         {
+                            canTargetPawns = false,
                             canTargetBuildings = true,
+                            canTargetPlants = true,
                             canTargetItems = true,
                             validator = t =>
                                 t.Thing != null &&
                                 t.Thing.def == wantedDef &&
-                                t.Thing.Spawned &&
-                                t.Thing.Map == map
+                                // Probably redundant
+                                //t.Thing.Spawned &&
+                                //t.Thing.Map == map && 
+                                unlockedRitual.ExtraThingValidator(t.Thing)
                         },
                         localTarget =>
                         {
-                            Thing thing = localTarget.Thing;
-                            if (thing == null)
-                                return;
-
-                            unlockedRitual.targetThing = thing;
+                            unlockedRitual.targetThing = localTarget.Thing;
 
                             OriginalActions();
                         });
