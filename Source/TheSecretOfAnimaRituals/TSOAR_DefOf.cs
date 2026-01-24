@@ -20,5 +20,15 @@ namespace tsoa.rituals
         public static HediffDef TSOA_PsychicFever_Failure;
 
         public static HediffDef TSOA_RegrowingPart;
+
+        public static WeatherDef Rain;
+
+        public static WeatherDef RainyThunderstorm;
+
+        public static WeatherDef DryThunderstorm;
+
+        public static WeatherDef SnowHard;
+
+        public static WeatherDef SnowGentle;
     }
 }

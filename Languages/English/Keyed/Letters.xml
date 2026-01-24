@@ -15,4 +15,7 @@
 	
 	<TSOA_EruptionSuccess>{0_nameDef} has completed performing the {RITUAL_definite} ritual successfully. Valuable minerals have been pulled to the surface.</TSOA_EruptionSuccess>
 	<TSOA_EruptionFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual, and an insectoid infestation has been brought to the surface along with the minerals.</TSOA_EruptionFailure>
+
+	<TSOA_StormSuccess>{0_nameDef} has completed performing the {RITUAL_definite} ritual successfully. The weather has been changed to {1}.</TSOA_StormSuccess>
+	<TSOA_StormFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual. The weather has been changed to {1}.</TSOA_StormFailure>
 </LanguageData>

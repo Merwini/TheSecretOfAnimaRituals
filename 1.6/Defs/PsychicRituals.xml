@@ -197,5 +197,36 @@
 			</points>
 		</successCurveAnyOre>
 	</tsoa.rituals.PsychicRitualDef_Eruption>
+	
+	<tsoa.rituals.PsychicRitualDef_Storm>
+		<defName>TSOA_StormRitual</defName>
+		<label>storm</label>
+		<description>Attempts to psychically manipulate the weather in the area around the anima tree. If the ritual succeeds, expect rain, snow, or a thunderstorm. If the ritual fails, expect a dry thunderstorm.</description>
+		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
+		<!--<iconPath>TODO</iconPath>-->
+		<researchPrerequisite>TSOA_EruptionResearch</researchPrerequisite>
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<successCurve>
+			<points>
+				<li>(0, 0.25)</li>
+				<li>(0.5, 0.75)</li>
+				<li>(1, 1)</li>
+			</points>
+		</successCurve>
+	</tsoa.rituals.PsychicRitualDef_Storm>
+
 
 </Defs>
