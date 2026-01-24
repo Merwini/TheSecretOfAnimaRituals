@@ -27,12 +27,13 @@ namespace tsoa.rituals
             base.Start(psychicRitual, parent);
             Pawn pawn = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
             // Can you have multiples of the same game condition? Probably? Best to let it account for multiples
-            List<GameCondition> draughts = pawn.Map.GameConditionManager.ActiveConditions.Where(gc => gc.def.defName == "Draught").ToList();
-            bool positiveOutcome = Rand.Chance(((PsychicRitualDef_Storm)psychicRitual.def).successCurve.Evaluate(psychicRitual.PowerPercent) * (draughts.NullOrEmpty() ? 1f : 0.5f));
+            // Want to re-gather these here instead of passing from def, in case anything has changed in between
+            List<GameCondition> droughts = pawn.Map.GameConditionManager.ActiveConditions.Where(gc => gc.def.defName == "Drought").ToList();
+            bool positiveOutcome = Rand.Chance(((PsychicRitualDef_Storm)psychicRitual.def).successCurve.Evaluate(psychicRitual.PowerPercent) * (droughts.NullOrEmpty() ? 1f : 0.5f));
             psychicRitual.ReleaseAllPawnsAndBuildings();
             if (pawn != null)
             {
-                ApplyOutcome(psychicRitual, pawn, positiveOutcome, draughts);
+                ApplyOutcome(psychicRitual, pawn, positiveOutcome, droughts);
             }
         }
 

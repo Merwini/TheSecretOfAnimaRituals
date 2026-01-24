@@ -13,6 +13,8 @@ namespace tsoa.rituals
     {
         public SimpleCurve successCurve;
 
+        List<GameCondition> droughts;
+
         public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
         {
             List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
@@ -23,7 +25,15 @@ namespace tsoa.rituals
 
         public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
         {
-            return outcomeDescription.Formatted(successCurve.Evaluate(qualityRange.min).ToStringPercent());
+            bool hasDrought = !droughts.NullOrEmpty();
+            return outcomeDescription.Formatted((successCurve.Evaluate(qualityRange.min) * (hasDrought ? 0.5f : 1f)).ToStringPercent());
+        }
+
+        public override void InitializeCast(Map map)
+        {
+            base.InitializeCast(map);
+
+            droughts = map.GameConditionManager.ActiveConditions.Where(gc => gc.def.defName == "Drought").ToList();
         }
     }
 }
