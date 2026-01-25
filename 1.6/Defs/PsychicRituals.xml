@@ -31,7 +31,7 @@
 		<label>tree relocation</label>
 		<description>Relocates the anima tree to a new location. If the ritual is successful, the tree will move to the desired location. If it is unsuccessful, it will end up at a random location near the desired target.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/Gizmos/RelocationRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_RelocationResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -44,7 +44,7 @@
 			<count>10</count>
 		</requiredOffering>
 		<cooldownHours>120</cooldownHours>
-		<chanterRole>ChanterAdvanced</chanterRole>
+		<chanterRole>Chanter</chanterRole>
 		<ritualFocuses>
 			<li>Plant_TreeAnima</li>
 		</ritualFocuses>
