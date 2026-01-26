@@ -7,47 +7,45 @@ using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
 
-namespace tsoa.rituals
+namespace tsoa.rituals;
+
+public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
 {
-    public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
+    public List<ThingDef> ritualFocuses; // List of allowed ritual focuses for this ritual
+    public Thing ritualFocus; // The actual focus used in the ritual instance
+
+    public ResearchProjectDef advancedResearchProject;
+
+    public bool targetsCell;
+    public IntVec3 targetCell;
+
+    public bool targetsPawn;
+    public Pawn targetPawn;
+
+    public ThingDef targetsThingOfDef;
+    public Thing targetThing;
+
+    public bool gizmoMakesFloatMenu;
+    public virtual List<string> FloatMenuOptionStrings => null;
+    public string selectedFloatMenuOptionString = null;
+
+    public virtual void HandleFloatMenuOption(string option)
     {
-        public List<ThingDef> ritualFocuses; // List of allowed ritual focuses for this ritual
-        public Thing ritualFocus; // The actual focus used in the ritual instance
+    }
 
-        public ResearchProjectDef advancedResearchProject;
+    public override void ResolveReferences()
+    {
+        base.ResolveReferences();
 
-        public bool targetsCell;
-        public IntVec3 targetCell;
-
-        public bool targetsPawn;
-        public Pawn targetPawn;
-
-        public ThingDef targetsThingOfDef;
-        public Thing targetThing;
-
-        public bool gizmoMakesFloatMenu;
-        public virtual List<string> FloatMenuOptionStrings => null;
-        public string selectedFloatMenuOptionString = null;
-
-        public virtual void HandleFloatMenuOption(string option)
+        if (ritualFocuses.NullOrEmpty())
         {
+            ritualFocuses = new List<ThingDef>();
+            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
         }
 
-
-        public override void ResolveReferences()
+        if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
         {
-            base.ResolveReferences();
-
-            if (ritualFocuses.NullOrEmpty())
-            {
-                ritualFocuses = new List<ThingDef>();
-                Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
-            }
-
-            if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
-            {
-                Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
-            }
+            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
         }
     }
 }

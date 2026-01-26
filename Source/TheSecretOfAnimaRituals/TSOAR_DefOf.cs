@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 using Verse;
 using RimWorld;
 
-namespace tsoa.rituals
+namespace tsoa.rituals;
+
+[DefOf]
+public class TSOAR_DefOf
 {
-    [DefOf]
-    public class TSOAR_DefOf
-    {
-        public static ThingDef PsychicRitualSpot;
+    public static ThingDef PsychicRitualSpot;
 
-        public static HediffDef TSOA_PsychicSevering;
+    public static HediffDef TSOA_PsychicSevering;
 
-        public static HediffDef TSOA_PsychicFever_Success;
+    public static HediffDef TSOA_PsychicFever_Success;
 
-        public static HediffDef TSOA_PsychicFever_Failure;
+    public static HediffDef TSOA_PsychicFever_Failure;
 
-        public static HediffDef TSOA_RegrowingPart;
-    }
+    public static HediffDef TSOA_RegrowingPart;
 }

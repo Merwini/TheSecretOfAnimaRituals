@@ -7,53 +7,52 @@ using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
 
-namespace tsoa.rituals
+namespace tsoa.rituals;
+
+public class PsychicRitualDef_Regrowth : PsychicRitualDef_Unlocked
 {
-    public class PsychicRitualDef_Regrowth : PsychicRitualDef_Unlocked
+    public SimpleCurve successCurve;
+
+    public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
     {
-        public SimpleCurve successCurve;
+        List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
+        list.Add(new PsychicRitualToil_Regrowth(InvokerRole, TargetRole));
+        return list;
+    }
 
-        public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
+    public override IEnumerable<string> BlockingIssues(PsychicRitualRoleAssignments assignments, Map map)
+    {
+        foreach (string item in base.BlockingIssues(assignments, map))
         {
-            List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
-            list.Add(new PsychicRitualToil_Regrowth(InvokerRole, TargetRole));
-            return list;
+            yield return item;
         }
-
-        public override IEnumerable<string> BlockingIssues(PsychicRitualRoleAssignments assignments, Map map)
-        {
-            foreach (string item in base.BlockingIssues(assignments, map))
-            {
-                yield return item;
-            }
-            Pawn target = assignments.FirstAssignedPawn(TargetRole);
+        Pawn target = assignments.FirstAssignedPawn(TargetRole);
             
-            if (!HasPermanentInjuries(target))
-            {
-                yield return "TSOA_RegrowthRitualBlocker".Translate();
-            }
-        }
-
-        public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
+        if (!HasPermanentInjuries(target))
         {
-            return outcomeDescription.Formatted(successCurve.Evaluate(qualityRange.min).ToStringPercent());
+            yield return "TSOA_RegrowthRitualBlocker".Translate();
         }
+    }
 
-        public bool HasPermanentInjuries(Pawn pawn)
-        {
-            if (pawn?.health?.hediffSet == null)
-                return false;
+    public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
+    {
+        return outcomeDescription.Formatted(successCurve.Evaluate(qualityRange.min).ToStringPercent());
+    }
 
-            foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
-            {
-                if (hediff is Hediff_MissingPart mp)
-                    return true;
-
-                if (hediff is Hediff_Injury injury && injury.IsPermanent())
-                    return true;
-            }
-
+    public bool HasPermanentInjuries(Pawn pawn)
+    {
+        if (pawn?.health?.hediffSet == null)
             return false;
+
+        foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
+        {
+            if (hediff is Hediff_MissingPart mp)
+                return true;
+
+            if (hediff is Hediff_Injury injury && injury.IsPermanent())
+                return true;
         }
+
+        return false;
     }
 }
