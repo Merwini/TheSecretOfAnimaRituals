@@ -47,28 +47,27 @@ public class PsychicRitualToil_Relocate : PsychicRitualToil
         }
     }
 
-    private void ApplyOutcome(PsychicRitual psychicRitual, int failureRadius, Pawn invoker)
-    {
-        Map map = ritualFocus.Map;
-        IntVec3 destination;
-        if (failureRadius <= 0)
+        private void ApplyOutcome(PsychicRitual psychicRitual, int failureRadius, Pawn invoker)
         {
-            destination = targetCell;
-        }
-        else if (CellFinder.TryFindRandomCellNear(targetCell, map, failureRadius,
-            cell =>
-                map.fertilityGrid.FertilityAt(cell) > 0.08f &&
-                cell.Standable(map) &&
-                !cell.Fogged(map),
-            out IntVec3 result))
-        {
-            destination = result;
-        }
-        else
-        {
-            destination = ritualFocus.Position;
-            // TODO some sort of failure message indicating that the tree didn't move?
-        }
+            Map map = ritualFocus.Map;
+            IntVec3 destination;
+            if (failureRadius <= 0)
+            {
+                destination = targetCell;
+            }
+            else if (CellFinder.TryFindRandomCellNear(targetCell, map, failureRadius,
+                cell =>
+                    map.fertilityGrid.FertilityAt(cell) > ThingDefOf.Plant_TreeAnima.plant.fertilityMin &&
+                    cell.Standable(map),
+                out IntVec3 result))
+            {
+                destination = result;
+            }
+            else
+            {
+                destination = ritualFocus.Position;
+                // TODO some sort of failure message indicating that the tree didn't move?
+            }
 
         if (destination.IsValid)
         {

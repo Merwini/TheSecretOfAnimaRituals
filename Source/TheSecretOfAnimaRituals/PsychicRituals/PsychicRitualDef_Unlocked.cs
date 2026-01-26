@@ -29,13 +29,24 @@ public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
     public virtual List<string> FloatMenuOptionStrings => null;
     public string selectedFloatMenuOptionString = null;
 
-    public virtual void HandleFloatMenuOption(string option)
-    {
-    }
+        public virtual bool ExtraCellValidator(IntVec3 cell, Map map)
+        {
+            return true;
+        }
 
-    public override void ResolveReferences()
-    {
-        base.ResolveReferences();
+        public virtual bool ExtraThingValidator(Thing thing)
+        {
+            return true;
+        }
+
+        // Didn't find a use case, might re-enable later but would require rewriting eruption and beckoning rituals
+        //public virtual void HandleFloatMenuOption(string option)
+        //{
+        //}
+
+        public override void ResolveReferences()
+        {
+            base.ResolveReferences();
 
         if (ritualFocuses.NullOrEmpty())
         {
@@ -43,9 +54,15 @@ public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
             Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
         }
 
-        if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
-        {
-            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
+            if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
+            {
+                Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
+            }
+
+            if (gizmoMakesFloatMenu && (targetsCell || targetsPawn || targetsThingOfDef != null))
+            {
+                Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked and is configured to make a float menu AND target something.");
+            }
         }
     }
 }

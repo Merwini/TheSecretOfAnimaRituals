@@ -127,39 +127,45 @@ public class HarmonyPatches
 
             Map map = Find.CurrentMap;
 
-            if (unlockedRitual.targetsCell)
-            {
-                Find.Targeter.BeginTargeting(
-                TargetingParameters.ForCell(),
-                localTarget =>
+                if (unlockedRitual.targetsCell)
                 {
-                    IntVec3 cell = localTarget.Cell;
-                    if (!cell.InBounds(map))
-                        return;
+                    Find.Targeter.BeginTargeting(
+                    new TargetingParameters
+                    {
+                        canTargetLocations = true,
+                        canTargetBuildings = false,
+                        canTargetPawns = false,
+                        validator = t =>
+                        {
+                            IntVec3 cell = t.Cell;
+                            return cell.InBounds(map) && unlockedRitual.ExtraCellValidator(cell, t.Map);
+                        }
+                    },
+                    localTarget =>
+                    {
+                        unlockedRitual.targetCell = localTarget.Cell;
 
-                    unlockedRitual.targetCell = cell;
+                        OriginalActions();
+                    });
 
-                    OriginalActions();
-                });
-
-                return false;
-            }
-            else if (unlockedRitual.targetsPawn)
-            {
-                Find.Targeter.BeginTargeting(
-                new TargetingParameters
+                    return false;
+                }
+                else if (unlockedRitual.targetsPawn)
                 {
-                    canTargetPawns = true,
-                    canTargetHumans = true,
-                    canTargetAnimals = true,
-                    canTargetBuildings = false,
-                    validator = t => t.Thing is Pawn
-                },
-                localTarget =>
-                {
-                    Pawn pawn = localTarget.Pawn;
-                    if (pawn == null)
-                        return;
+                    Find.Targeter.BeginTargeting(
+                    new TargetingParameters
+                    {
+                        canTargetPawns = true,
+                        canTargetBuildings = false,
+                        validator = t => 
+                            t.Thing is Pawn &&
+                            unlockedRitual.ExtraThingValidator(t.Thing)
+                    },
+                    localTarget =>
+                    {
+                        Pawn pawn = localTarget.Pawn;
+                        if (pawn == null)
+                            return;
 
                     unlockedRitual.targetPawn = pawn;
 
@@ -172,24 +178,24 @@ public class HarmonyPatches
             {
                 ThingDef wantedDef = unlockedRitual.targetsThingOfDef;
 
-                Find.Targeter.BeginTargeting(
-                    new TargetingParameters
-                    {
-                        canTargetBuildings = true,
-                        canTargetItems = true,
-                        validator = t =>
-                            t.Thing != null &&
-                            t.Thing.def == wantedDef &&
-                            t.Thing.Spawned &&
-                            t.Thing.Map == map
-                    },
-                    localTarget =>
-                    {
-                        Thing thing = localTarget.Thing;
-                        if (thing == null)
-                            return;
-
-                        unlockedRitual.targetThing = thing;
+                    Find.Targeter.BeginTargeting(
+                        new TargetingParameters
+                        {
+                            canTargetPawns = false,
+                            canTargetBuildings = true,
+                            canTargetPlants = true,
+                            canTargetItems = true,
+                            validator = t =>
+                                t.Thing != null &&
+                                t.Thing.def == wantedDef &&
+                                // Probably redundant
+                                //t.Thing.Spawned &&
+                                //t.Thing.Map == map && 
+                                unlockedRitual.ExtraThingValidator(t.Thing)
+                        },
+                        localTarget =>
+                        {
+                            unlockedRitual.targetThing = localTarget.Thing;
 
                         OriginalActions();
                     });

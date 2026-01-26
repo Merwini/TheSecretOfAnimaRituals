@@ -113,4 +113,18 @@
 		<researchViewY>0.60</researchViewY>
 	</ResearchProjectDef>
 	
+	<ResearchProjectDef>
+		<defName>TSOA_StormResearch</defName>
+		<label>storm ritual</label>
+		<description>Perform a psychic ritual to try to invoke a rainstorm.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_RelocationResearch</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>0.60</researchViewY>
+	</ResearchProjectDef>
+	
 </Defs>
