@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<ResearchProjectDef>
+	<!-- Now given by TSOA_AnimaOne-->
+	<!--<ResearchProjectDef>
 		<defName>TSOA_RelocationResearch</defName>
 		<label>tree relocation ritual</label>
 		<description>Perform a psychic ritual that skipgates an anima tree to a new location.</description>
@@ -13,8 +14,22 @@
 		<tab>TSOA_ResearchTab</tab>
 		<researchViewX>1.00</researchViewX>
 		<researchViewY>0.60</researchViewY>
+	</ResearchProjectDef>-->
+
+	<ResearchProjectDef>
+		<defName>TSOA_StormResearch</defName>
+		<label>storm ritual</label>
+		<description>Perform a psychic ritual to try to invoke a rainstorm.</description>
+		<baseCost>600</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_AnimaOne</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>0.70</researchViewY>
 	</ResearchProjectDef>
-	
+
 	<ResearchProjectDef>
 		<defName>TSOA_SeveringResearch</defName>
 		<label>severing ritual</label>
@@ -22,11 +37,11 @@
 		<baseCost>600</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
+			<li>TSOA_AnimaOne</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>0.00</researchViewX>
-		<researchViewY>0.60</researchViewY>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>1.40</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
@@ -36,25 +51,26 @@
 		<baseCost>600</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
+			<li>TSOA_AnimaOne</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>0.00</researchViewX>
-		<researchViewY>0.10</researchViewY>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>2.10</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
 		<defName>TSOA_RegrowthResearch</defName>
 		<label>regrowth ritual</label>
 		<description>Perform a psychic ritual that regrows missing body parts and heals permanent injuries.</description>
-		<baseCost>600</baseCost>
+		<baseCost>900</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
+			<li>TSOA_FeverResearch</li>
+			<li>TSOA_AnimaTwo</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>1.00</researchViewX>
-		<researchViewY>0.10</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>2.10</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
@@ -64,11 +80,11 @@
 		<baseCost>600</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
+			<li>TSOA_AnimaTwo</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>2.00</researchViewX>
-		<researchViewY>0.10</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>0.70</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
@@ -79,10 +95,11 @@
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
 			<li>TSOA_BeckoningResearch</li>
+			<li>TSOA_AnimaThree</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>3.00</researchViewX>
-		<researchViewY>0.10</researchViewY>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>0.70</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
@@ -92,11 +109,11 @@
 		<baseCost>600</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
+			<li>TSOA_AnimaTwo</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>2.00</researchViewX>
-		<researchViewY>0.60</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>1.40</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
@@ -107,24 +124,13 @@
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
 			<li>TSOA_EruptionResearch</li>
+			<li>TSOA_AnimaThree</li>
 		</prerequisites>
 		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>3.00</researchViewX>
-		<researchViewY>0.60</researchViewY>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>1.40</researchViewY>
 	</ResearchProjectDef>
 	
-	<ResearchProjectDef>
-		<defName>TSOA_StormResearch</defName>
-		<label>storm ritual</label>
-		<description>Perform a psychic ritual to try to invoke a rainstorm.</description>
-		<baseCost>1200</baseCost>
-		<techLevel>Medieval</techLevel>
-		<prerequisites>
-			<li>TSOA_RelocationResearch</li>
-		</prerequisites>
-		<tab>TSOA_ResearchTab</tab>
-		<researchViewX>3.00</researchViewX>
-		<researchViewY>0.60</researchViewY>
-	</ResearchProjectDef>
+	
 	
 </Defs>

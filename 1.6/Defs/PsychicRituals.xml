@@ -1,6 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+	<tsoa.rituals.PsychicRitualDef_Relocate>
+		<defName>TSOA_RelocationRitual</defName>
+		<label>tree relocation</label>
+		<description>Relocates the anima tree to a new location. If the ritual is successful, the tree will move to the desired location. If it is unsuccessful, it will end up at a random location near the desired target.</description>
+		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
+		<iconPath>TSOA/Gizmos/RelocationRitualGizmo</iconPath>
+		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<chanterRole>Chanter</chanterRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<targetsCell>true</targetsCell>
+		<relocateCurve>
+			<points>
+				<li>(0, 0)</li>
+				<li>(0.5, 15)</li>
+				<li>(1, 22)</li>
+			</points>
+		</relocateCurve>
+	</tsoa.rituals.PsychicRitualDef_Relocate>
+	
 	<tsoa.rituals.PsychicRitualDef_Severing>
 		<defName>TSOA_SeveringRitual</defName>
 		<label>psychic severing</label>
@@ -26,37 +58,6 @@
 		<failureDurationDays>4~6</failureDurationDays>
 	</tsoa.rituals.PsychicRitualDef_Severing>
 
-	<tsoa.rituals.PsychicRitualDef_Relocate>
-		<defName>TSOA_RelocationRitual</defName>
-		<label>tree relocation</label>
-		<description>Relocates the anima tree to a new location. If the ritual is successful, the tree will move to the desired location. If it is unsuccessful, it will end up at a random location near the desired target.</description>
-		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<iconPath>TSOA/Gizmos/RelocationRitualGizmo</iconPath>
-		<researchPrerequisite>TSOA_RelocationResearch</researchPrerequisite>
-		<hoursUntilOutcome>1</hoursUntilOutcome>
-		<castableOnPocketMaps>true</castableOnPocketMaps>
-		<requiredOffering>
-			<filter>
-				<thingDefs>
-					<li>TSOA_AnimaGrassResource</li>
-				</thingDefs>
-			</filter>
-			<count>10</count>
-		</requiredOffering>
-		<cooldownHours>120</cooldownHours>
-		<chanterRole>Chanter</chanterRole>
-		<ritualFocuses>
-			<li>Plant_TreeAnima</li>
-		</ritualFocuses>
-		<targetsCell>true</targetsCell>
-		<relocateCurve>
-			<points>
-				<li>(0, 0)</li>
-				<li>(0.5, 15)</li>
-				<li>(1, 22)</li>
-			</points>
-		</relocateCurve>
-	</tsoa.rituals.PsychicRitualDef_Relocate>
 
 	<tsoa.rituals.PsychicRitualDef_Fever>
 		<defName>TSOA_FeverRitual</defName>
