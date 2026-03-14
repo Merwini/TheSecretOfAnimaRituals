@@ -6,7 +6,7 @@
 		<label>tree relocation</label>
 		<description>Relocates the anima tree to a new location. If the ritual is successful, the tree will move to the desired location. If it is unsuccessful, it will end up at a random location near the desired target.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<iconPath>TSOA/Gizmos/RelocationRitualGizmo</iconPath>
+		<iconPath>TSOA/UI/Gizmos/RelocationRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -38,7 +38,7 @@
 		<label>psychic severing</label>
 		<description>Temporarily severs the psychic attunement of all humanlike creatures on the map, to protect them from negative psychic forces like psychic drones. Performed properly, the effects will last for two days: just long enough to outlast most psychic drones. Performed improperly, the effects will last for much longer.</description>
 		<outcomeDescription>At the current ritual quality, the chance of successfully controlling the duration is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/SeveringRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_SeveringResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -64,7 +64,7 @@
 		<label>induce psychic fever</label>
 		<description>Induces a psychic fever in the ritual targets, a desperate action, for those who have little chance of surviving a disease otherwise. The psychic fever greatly increases immunity gain speed, but makes the target delirious and unable to care for themself and others. Those experiencing psychic fever require frequent tending, or they will die in 6 hours. The invoker will attempt to control the fever, limiting its duration to just a couple days, but if the ritual goes wrong the duration will be much longer.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/FeverRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_FeverResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -95,7 +95,7 @@
 		<label>somatic regrowth</label>
 		<description>Induces the target's body to begin regrowing a lost or permanently damaged body part. The body part will regrow over a period of days or weeks. The invoker will attempt to control the growth, but if the ritual goes wrong it may induce uncontrolled growth in another part of the body, resulting in a carcinoma.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/RegrowthRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_RegrowthResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -126,7 +126,7 @@
 		<label>psychic beckoning</label>
 		<description>Psychically beckons across great distances, trying to influence a trader to visit your colony. With additional research and increased difficulty, you can even choose what kind of trader it will be that receives the beckoning. However, if the ritual is unsuccessful, it will be a group that means to do you harm, instead.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/BeckoningRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_BeckoningResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -165,7 +165,7 @@
 		<label>eruption</label>
 		<description>Psychically searches out useful minerals deep below the earth, and pulls them to the surface. With additional research and increased difficulty, the type of mineral can be chosen. If the ritual goes wrong, however, it may pull unwanted things to the surface as well.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/EruptionRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_EruptionResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -204,7 +204,7 @@
 		<label>storm</label>
 		<description>Attempts to psychically manipulate the weather in the area around the anima tree. If the ritual succeeds, expect rain, snow, or a thunderstorm, and to end a drought if it is not being caused by some other force. If the ritual fails, expect a dry thunderstorm. The ritual is much more difficult during a drought.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
-		<!--<iconPath>TODO</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/StormRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_StormResearch</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
