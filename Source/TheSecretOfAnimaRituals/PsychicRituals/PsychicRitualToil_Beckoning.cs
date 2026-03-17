@@ -9,7 +9,7 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals;
 
-public class PsychicRitualToil_Beckoning : PsychicRitualToil
+public class PsychicRitualToil_Beckoning : PsychicRitualToil_AnimaAffinity
 {
     private PsychicRitualRoleDef invokerRole;
     private List<Faction> eligibleFactions;

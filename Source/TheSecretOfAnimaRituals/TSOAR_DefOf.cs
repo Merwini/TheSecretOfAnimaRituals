@@ -13,6 +13,8 @@ public class TSOAR_DefOf
 {
     public static ThingDef PsychicRitualSpot;
 
+    public static HediffDef TSOA_AnimaAffinityHediff;
+
     public static HediffDef TSOA_PsychicSevering;
 
     public static HediffDef TSOA_PsychicFever_Success;

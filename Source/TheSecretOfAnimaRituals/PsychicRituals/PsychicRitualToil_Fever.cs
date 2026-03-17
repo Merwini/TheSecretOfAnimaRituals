@@ -6,7 +6,7 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals;
 
-public class PsychicRitualToil_Fever : PsychicRitualToil
+public class PsychicRitualToil_Fever : PsychicRitualToil_AnimaAffinity
 {
     PsychicRitualRoleDef invokerRole;
     PsychicRitualRoleDef targetRole;

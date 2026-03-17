@@ -9,7 +9,7 @@ using Verse.AI.Group;
 
 namespace tsoa.rituals;
 
-public class PsychicRitualToil_Regrowth : PsychicRitualToil
+public class PsychicRitualToil_Regrowth : PsychicRitualToil_AnimaAffinity
 {
     private PsychicRitualRoleDef invokerRole;
     private PsychicRitualRoleDef targetRole;
