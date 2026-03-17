@@ -21,7 +21,7 @@
 		<label>storm ritual</label>
 		<description>Perform a psychic ritual to try to invoke a rainstorm.</description>
 		<baseCost>600</baseCost>
-		<techLevel>Medieval</techLevel>
+		<techLevel>Neolithic</techLevel>
 		<prerequisites>
 			<li>TSOA_AnimaOne</li>
 		</prerequisites>
@@ -35,7 +35,7 @@
 		<label>severing ritual</label>
 		<description>Perform a psychic ritual that temporarily severs the psychic connection of all humans and humanlike creatures in the area, making them psychically deaf.</description>
 		<baseCost>600</baseCost>
-		<techLevel>Medieval</techLevel>
+		<techLevel>Neolithic</techLevel>
 		<prerequisites>
 			<li>TSOA_AnimaOne</li>
 		</prerequisites>
@@ -49,7 +49,7 @@
 		<label>fever ritual</label>
 		<description>Perform a psychic ritual that induces a psychic fever in the targets. The fever rapidly helps rapidly cure disease, but requires frequent medical tending or the target will die.</description>
 		<baseCost>600</baseCost>
-		<techLevel>Medieval</techLevel>
+		<techLevel>Neolithic</techLevel>
 		<prerequisites>
 			<li>TSOA_AnimaOne</li>
 		</prerequisites>
