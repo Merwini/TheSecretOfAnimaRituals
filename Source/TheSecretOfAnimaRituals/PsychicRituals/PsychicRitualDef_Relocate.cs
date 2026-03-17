@@ -13,17 +13,17 @@ public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
 {
     public SimpleCurve relocateCurve;
 
-        public override bool ExtraCellValidator(IntVec3 cell, Map map)
-        {
-            return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin;
-        }
+    public override bool ExtraCellValidator(IntVec3 cell, Map map)
+    {
+        return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin;
+    }
 
-        public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
-        {
-            List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
-            list.Add(new PsychicRitualToil_Relocate(InvokerRole, targetCell, ritualFocus));
+    public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
+    {
+        List<PsychicRitualToil> list = base.CreateToils(psychicRitual, graph);
+        list.Add(new PsychicRitualToil_Relocate(InvokerRole, targetCell, ritualFocus));
 
-        return list;
+    return list;
     }
 
     public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
 using static UnityEngine.GraphicsBuffer;
+using static Verse.PatchOperation;
 
 namespace tsoa.rituals;
 
@@ -40,11 +41,18 @@ public class PsychicRitualToil_Animagenesis : PsychicRitualToil_AnimaAffinity
         }
     }
 
-    private void ApplyOutcome()
+    private void ApplyOutcome(PsychicRitual psychicRitual, bool success, Pawn invoker, Pawn target)
     {
-        // kill the target
-        // apply psychic soothe if successful
-        // spawn an anima seed/pearl (need texture)
+        IntVec3 cell = target.Position;
+
+        ExecutionUtility.DoExecutionByCut(invoker, target);
+
+        if (success)
+        {
+            // Do psychic soothe
+        }
+
+        GenSpawn.Spawn(ThingDef.Named("TSOA_AnimaPearl"), cell, psychicRitual.Map);
     }
 
     public override void ExposeData()

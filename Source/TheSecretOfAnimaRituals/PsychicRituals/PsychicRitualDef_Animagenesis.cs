@@ -12,6 +12,23 @@ namespace tsoa.rituals;
 public class PsychicRitualDef_Animagenesis : PsychicRitualDef_Unlocked
 {
     public SimpleCurve successCurve;
+    public int minimumAffinity = 20;
+
+    public override IEnumerable<string> BlockingIssues(PsychicRitualRoleAssignments assignments, Map map)
+    {
+        foreach (string item in base.BlockingIssues(assignments, map))
+        {
+            yield return item;
+        }
+        Pawn target = assignments.FirstAssignedPawn(TargetRole);
+        Hediff_AnimaAffinity hediff = target?.health?.hediffSet?.GetFirstHediff<Hediff_AnimaAffinity>() as Hediff_AnimaAffinity;
+
+
+        if (hediff == null || hediff.CheckAffinity() < minimumAffinity)
+        {
+            yield return "TSOA_AnimagenesisRitualBlocker".Translate(minimumAffinity);
+        }
+    }
 
     public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph parent)
     {

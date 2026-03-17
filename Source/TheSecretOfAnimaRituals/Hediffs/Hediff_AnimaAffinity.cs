@@ -34,10 +34,16 @@ public class Hediff_AnimaAffinity : Hediff
         }
     }
 
+    // TODO these could just be a getter and setter
     public void AddAffinity(float amount)
     {
         currentAffinity += amount;
         curStage = null;
+    }
+
+    public float CheckAffinity()
+    {
+        return currentAffinity;
     }
 
     public override void ExposeData()
