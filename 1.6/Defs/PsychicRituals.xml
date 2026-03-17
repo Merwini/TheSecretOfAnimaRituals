@@ -229,5 +229,38 @@
 		</successCurve>
 	</tsoa.rituals.PsychicRitualDef_Storm>
 
-
+	<tsoa.rituals.PsychicRitualDef_Animagenesis>
+		<defName>TSOA_AnimagenesisRitual</defName>
+		<label>animagenesis</label>
+		<description>Sacrifice a colonist with high affinity to the anima tree to create the seed of a new tree. A high quality ritual will also create a psychic soothe, to ameliorate the pain of losing a friend.</description>
+		<outcomeDescription>There is no chance of failure.</outcomeDescription>
+		<iconPath>TSOA/UI/Gizmos/AnimagenesisRitualGizmo</iconPath>
+		<researchPrerequisite>TSOA_AnimaTwo</researchPrerequisite>
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaSap</li>
+				</thingDefs>
+			</filter>
+			<count>5</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<targetRole>TSOA_AnimagenesisTarget</targetRole>
+		<chanterRole>ChanterAdvanced</chanterRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<successCurve>
+			<points>
+				<li>(0, 0.25)</li>
+				<li>(0.5, 0.75)</li>
+				<li>(1, 1)</li>
+			</points>
+		</successCurve>
+	</tsoa.rituals.PsychicRitualDef_Animagenesis>
+	
+	<!-- TODO avatar of anima for TSOA_AnimaThree -->
+	
 </Defs>

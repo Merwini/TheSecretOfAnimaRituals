@@ -3,21 +3,28 @@
 	<PsychicRitualRoleDef>
 		<defName>TSOA_FeverTarget</defName>
 		<label>feverant</label>
-		<allowedCount>1</allowedCount>
 		<allowedConditions>Default, Downed, Prisoner, Sleeping, IdeoUnwilling</allowedConditions>
 		<applyPowerOffset>false</applyPowerOffset>
 		<removeOnLost>false</removeOnLost>
-		<allowedCount>0~6</allowedCount>
+		<allowedCount>1~6</allowedCount>
 	</PsychicRitualRoleDef>
 
 	<PsychicRitualRoleDef>
 		<defName>TSOA_RegrowthTarget</defName>
 		<label>target</label>
-		<allowedCount>1</allowedCount>
 		<allowedConditions>Default, Downed, Sleeping, IdeoUnwilling</allowedConditions>
 		<applyPowerOffset>false</applyPowerOffset>
 		<removeOnLost>false</removeOnLost>
 		<allowedCount>1</allowedCount>
+	</PsychicRitualRoleDef>
+
+	<PsychicRitualRoleDef>
+		<defName>TSOA_AnimagenesisTarget</defName>
+		<label>sacrifant</label>
+		<allowedCount>1</allowedCount>
+		<allowedConditions>Default, Downed, Sleeping, IdeoUnwilling</allowedConditions>
+		<applyPowerOffset>false</applyPowerOffset>
+		<removeOnLost>false</removeOnLost>
 	</PsychicRitualRoleDef>
 	
 </Defs>
