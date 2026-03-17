@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+	<TSOA_RelocationNoMove>Anima tree failed to move to a new location.</TSOA_RelocationNoMove>
+	
 	<TSOA_RegrowthRitualBlocker>Ritual target has no missing body parts or permanent injuries.</TSOA_RegrowthRitualBlocker>
 	<TSOA_BeckoningRitualBlocker>No faction can currently send the selected kind of trader.</TSOA_BeckoningRitualBlocker>
 
