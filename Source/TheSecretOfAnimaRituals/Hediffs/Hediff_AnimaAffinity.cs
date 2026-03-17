@@ -12,6 +12,13 @@ namespace tsoa.rituals;
 public class Hediff_AnimaAffinity : Hediff
 {
     private float currentAffinity = 0;
+    public float CurrentAffinity
+    {
+        get
+        {
+            return currentAffinity;
+        }
+    }
 
     private HediffStage curStage;
     public override HediffStage CurStage
@@ -34,17 +41,25 @@ public class Hediff_AnimaAffinity : Hediff
         }
     }
 
-    // TODO these could just be a getter and setter
+    // I decided AddAffinity is better than a setter
     public void AddAffinity(float amount)
     {
         currentAffinity += amount;
         curStage = null;
     }
 
-    public float CheckAffinity()
+    public static void AddOrUpdateAffinityHediff(Pawn pawn, float amount)
     {
-        return currentAffinity;
+        Hediff_AnimaAffinity hediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(TSOAR_DefOf.TSOA_AnimaAffinityHediff) as Hediff_AnimaAffinity;
+        if (hediff == null)
+        {
+            hediff = (Hediff_AnimaAffinity)HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_AnimaAffinityHediff, pawn);
+            pawn.health.AddHediff(hediff);
+        }
+        hediff.AddAffinity(amount);
     }
+
+    public override string LabelInBrackets => currentAffinity.ToStringPercent();
 
     public override void ExposeData()
     {

@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
-using static UnityEngine.GraphicsBuffer;
-using static Verse.PatchOperation;
 
 namespace tsoa.rituals;
 
 public class PsychicRitualToil_Animagenesis : PsychicRitualToil_AnimaAffinity
 {
+    const int sootheDurationTicks = 300000; // 5 days
+
     PsychicRitualRoleDef invokerRole;
     PsychicRitualRoleDef targetRole;
 
@@ -49,7 +49,9 @@ public class PsychicRitualToil_Animagenesis : PsychicRitualToil_AnimaAffinity
 
         if (success)
         {
-            // Do psychic soothe
+            GameCondition_PsychicEmanation gameCondition_PsychicEmanation = (GameCondition_PsychicEmanation)GameConditionMaker.MakeCondition(GameConditionDefOf.PsychicSoothe, sootheDurationTicks);
+            gameCondition_PsychicEmanation.gender = Gender.None;
+            psychicRitual.Map.GameConditionManager.RegisterCondition(gameCondition_PsychicEmanation);
         }
 
         GenSpawn.Spawn(ThingDef.Named("TSOA_AnimaPearl"), cell, psychicRitual.Map);

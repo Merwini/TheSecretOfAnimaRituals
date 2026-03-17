@@ -21,10 +21,10 @@ public class PsychicRitualDef_Animagenesis : PsychicRitualDef_Unlocked
             yield return item;
         }
         Pawn target = assignments.FirstAssignedPawn(TargetRole);
-        Hediff_AnimaAffinity hediff = target?.health?.hediffSet?.GetFirstHediff<Hediff_AnimaAffinity>() as Hediff_AnimaAffinity;
+        Hediff_AnimaAffinity hediff = target?.health?.hediffSet?.GetFirstHediff<Hediff_AnimaAffinity>();
 
 
-        if (hediff == null || hediff.CheckAffinity() < minimumAffinity)
+        if (hediff == null || hediff.CurrentAffinity < minimumAffinity)
         {
             yield return "TSOA_AnimagenesisRitualBlocker".Translate(minimumAffinity);
         }
