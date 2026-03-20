@@ -92,7 +92,7 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
     private List<Thing> SpawnOreVein(int oreAmount, Map map, IntVec3 chosenCell)
     {
         List<Thing> spawnedOres = new List<Thing>();
-        foreach (IntVec3 cell in GridShapeMaker.IrregularLump(chosenCell, map, oreAmount, Validator))
+        foreach (IntVec3 cell in GridShapeMaker.IrregularLump(chosenCell, map, oreAmount, (IntVec3 c) => IsValid(c, map)))
         {
             spawnedOres.Add(GenSpawn.Spawn(chosenOreDef, cell, map));
         }
@@ -127,9 +127,24 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
         }
     }
 
-    bool Validator(IntVec3 cell)
+    // TODO might need more validators, will have to try it some and see if it does anything weird
+    bool IsValid(IntVec3 c, Map map)
     {
-        // TODO
+        if (!c.InBounds(map))
+            return false;
+
+        if (!c.Standable(map))
+            return false;
+
+        if (c.Fogged(map))
+            return false;
+
+        if (c.Roofed(map))
+            return false;
+
+        if (!c.GetRoom(map).PsychologicallyOutdoors)
+            return false;
+
         return true;
     }
 

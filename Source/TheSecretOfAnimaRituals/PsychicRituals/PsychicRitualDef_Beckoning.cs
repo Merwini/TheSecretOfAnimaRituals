@@ -72,7 +72,7 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
         }
         if (eligibleFactions.NullOrEmpty())
         {
-            yield return "TSOA_BeckoningRitualBlocker".Translate(); // TODO break it down into more specific reasons
+            yield return "TSOA_BeckoningRitualBlocker".Translate();
         }
     }
 

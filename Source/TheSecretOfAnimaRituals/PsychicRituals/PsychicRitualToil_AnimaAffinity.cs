@@ -18,33 +18,24 @@ public class PsychicRitualToil_AnimaAffinity : PsychicRitualToil
             IEnumerable<Pawn> invokers = psychicRitual.assignments.AssignedPawns(unlocked.InvokerRole);
             foreach (Pawn invoker in invokers)
             {
-                AddOrUpdateAffinityHediff(invoker, unlocked.invokerAffinity);
+                Hediff_AnimaAffinity.AddOrUpdateAffinityHediff(invoker, unlocked.invokerAffinity);
             }
 
             IEnumerable<Pawn> targets = psychicRitual.assignments.AssignedPawns(unlocked.TargetRole);
             foreach (Pawn target in targets)
             {
-                AddOrUpdateAffinityHediff(target, unlocked.targetAffinity);
+                Hediff_AnimaAffinity.AddOrUpdateAffinityHediff(target, unlocked.targetAffinity);
             }
 
             IEnumerable<Pawn> chanters = psychicRitual.assignments.AssignedPawns(unlocked.ChanterRole);
             foreach (Pawn chanter in chanters)
             {
-                AddOrUpdateAffinityHediff(chanter, unlocked.chanterAffinity);
+                Hediff_AnimaAffinity.AddOrUpdateAffinityHediff(chanter, unlocked.chanterAffinity);
             }
         }
 
         base.End(psychicRitual, parent, success);
     }
 
-    public void AddOrUpdateAffinityHediff(Pawn pawn, float amount)
-    {
-        Hediff_AnimaAffinity hediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(TSOAR_DefOf.TSOA_AnimaAffinityHediff) as Hediff_AnimaAffinity;
-        if (hediff == null)
-        {
-            hediff = (Hediff_AnimaAffinity)HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_AnimaAffinityHediff, pawn);
-            pawn.health.AddHediff(hediff);
-        }
-        hediff.AddAffinity(amount);
-    }
+    
 }

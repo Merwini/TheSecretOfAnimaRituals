@@ -66,7 +66,7 @@ public class PsychicRitualToil_Relocate : PsychicRitualToil_AnimaAffinity
             else
             {
                 destination = ritualFocus.Position;
-                // TODO some sort of failure message indicating that the tree didn't move?
+                Messages.Message("TSOA_RelocationNoMove".Translate(), MessageTypeDefOf.NegativeEvent);
             }
 
         if (destination.IsValid)
