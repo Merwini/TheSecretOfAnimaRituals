@@ -6,7 +6,7 @@
 	<supportedVersions>
 		<li>1.6</li>
 	</supportedVersions>
-	<description>Rituals</description>
+	<description>A mod in The Secret of Anima series adding new anima tree rituals, based on Anomaly's psychic rituals.</description>
 	<modDependencies>
 		<li>
 			<packageId>tsoa.core</packageId>
@@ -18,5 +18,16 @@
 			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Royalty</packageId>
+			<displayName>Royalty</displayName>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Anomaly</packageId>
+			<displayName>Anomaly</displayName>
+		</li>
 	</modDependencies>
+	<loadAfter>
+		<li>tsoa.core</li>
+	</loadAfter>
 </ModMetaData>
