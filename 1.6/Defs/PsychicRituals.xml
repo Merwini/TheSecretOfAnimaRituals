@@ -36,8 +36,26 @@
 	<tsoa.rituals.PsychicRitualDef_FlowerPower>
 		<defName>TSOA_FlowerPowerRitual</defName>
 		<label>flower empowerment</label>
-
-
+		<description>Temporarily empowers anima flowers on the map to manipulate energy around them, heating or cooling the room they are in to bring it closer to comfortable levels for humans. The temperature change is greater depending on ritual quality, and adding additional flowers to a room increases the effect.</description>
+		<!--<iconPath>TSOA/UI/Gizmos/RelocationRitualGizmo</iconPath>-->
+		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>2</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<durationHours>7.5</durationHours>
+		<chanterRole>ChanterAdvanced</chanterRole>
+		<invokerAffinity>0.02</invokerAffinity>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
 		<flowerCurve>
 			<points>
 				<li>(0, 0.5)</li>

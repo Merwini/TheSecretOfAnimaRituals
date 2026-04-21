@@ -13,6 +13,8 @@ public class CompBiHeatPusherRitualized : CompBiHeatPusher
 {
     public static GameComponent_PsychicRitualManager psychicRitualManager;
 
+    protected override float HeatPerSecond => base.HeatPerSecond * GameComponent_AnimaRitual.Instance.flowerPowerMult;
+
     public override bool ShouldPushHeatNow(out float temperature)
     {
         if (GameComponent_AnimaRitual.Instance.flowerPowerEndTick < Find.TickManager.TicksGame)
@@ -27,7 +29,7 @@ public class CompBiHeatPusherRitualized : CompBiHeatPusher
     public override string CompInspectStringExtra()
     {
         int ticksLeft = GameComponent_AnimaRitual.Instance.flowerPowerEndTick - Find.TickManager.TicksGame;
-
+        Log.Message(ticksLeft.ToString());
         if (ticksLeft < 0)
         {
             return "TSOA_FlowerPowerInactive".Translate();

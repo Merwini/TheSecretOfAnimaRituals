@@ -12,7 +12,7 @@ namespace tsoa.rituals;
 public class PsychicRitualDef_FlowerPower : PsychicRitualDef_Unlocked
 {
     public SimpleCurve flowerCurve;
-    public float durationDays;
+    public float durationHours;
 
     public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
     {
@@ -21,9 +21,9 @@ public class PsychicRitualDef_FlowerPower : PsychicRitualDef_Unlocked
         return list;
     }
 
-    public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
-    {
-        // TODO change this
-        return outcomeDescription.Formatted(qualityRange.min.ToStringPercent());
-    }
+    //public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
+    //{
+    //    // TODO change this
+    //    return outcomeDescription.Formatted(qualityRange.min.ToStringPercent());
+    //}
 }

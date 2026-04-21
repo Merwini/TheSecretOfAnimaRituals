@@ -24,7 +24,7 @@ public class PsychicRitualToil_FlowerPower : PsychicRitualToil_AnimaAffinity
         base.Start(psychicRitual, parent);
         Pawn pawn = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
         float outcomeStrength = ((PsychicRitualDef_FlowerPower)psychicRitual.def).flowerCurve.Evaluate(psychicRitual.PowerPercent);
-        float durationDays = ((PsychicRitualDef_FlowerPower)psychicRitual.def).durationDays;
+        float durationDays = ((PsychicRitualDef_FlowerPower)psychicRitual.def).durationHours;
 
         if (pawn != null)
         {
@@ -34,10 +34,10 @@ public class PsychicRitualToil_FlowerPower : PsychicRitualToil_AnimaAffinity
 
     private void ApplyOutcome(PsychicRitual psychicRitual, PsychicRitualRoleDef invokerRole, float outcomeStrength, float durationDays)
     {
-        GameComponent_AnimaRitual.Instance.flowerPowerEndTick = Find.TickManager.TicksGame + Mathf.RoundToInt(durationDays * GenDate.TicksPerDay);
+        GameComponent_AnimaRitual.Instance.flowerPowerEndTick = Find.TickManager.TicksGame + Mathf.RoundToInt(durationDays * GenDate.TicksPerHour);
         GameComponent_AnimaRitual.Instance.flowerPowerMult = outcomeStrength;
 
-        Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), "TSOA_FlowerPowerOutcome".Translate(psychicRitual.assignments.FirstAssignedPawn(invokerRole), durationDays.ToString("F1"), outcomeStrength.ToString("P1"), psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
+        Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), "TSOA_FlowerPowerSuccess".Translate(psychicRitual.assignments.FirstAssignedPawn(invokerRole), durationDays.ToString("F1"), outcomeStrength.ToString("P1"), psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
     }
 
     public override void ExposeData()
