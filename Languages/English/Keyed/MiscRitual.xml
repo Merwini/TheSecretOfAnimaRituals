@@ -8,4 +8,6 @@
 
 	<TSOA_AnimagenesisRitualBlocker>Sacrifant needs at least {0} anima tree affinity.</TSOA_AnimagenesisRitualBlocker>
 
+	<TSOA_FlowerPowerInactive>Must be empowered by ritual to change temperature.</TSOA_FlowerPowerInactive>
+
 </LanguageData>

@@ -32,4 +32,6 @@ public class TSOAR_DefOf
     public static WeatherDef SnowHard;
 
     public static WeatherDef SnowGentle;
+
+    public static PsychicRitualDef_FlowerPower TSOA_FlowerPowerRitual;
 }

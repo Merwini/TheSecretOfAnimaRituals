@@ -32,6 +32,11 @@
 			</points>
 		</relocateCurve>
 	</tsoa.rituals.PsychicRitualDef_Relocate>
+
+	<tsoa.rituals.PsychicRitualDef_FlowerPower>
+		<defName>TSOA_FlowerPowerRitual</defName>
+		<label>flower empowerment</label>
+	</tsoa.rituals.PsychicRitualDef_FlowerPower>
 	
 	<tsoa.rituals.PsychicRitualDef_Severing>
 		<defName>TSOA_SeveringRitual</defName>

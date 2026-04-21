@@ -57,7 +57,7 @@ public class HarmonyPatches
         {
             var codes = new List<CodeInstruction>(instructions);
 
-            Type iteratorType = AccessTools.Inner(typeof(Verse.AI.Group.PsychicRitualGizmo),"<GetGizmos>d__0");
+            Type iteratorType = AccessTools.Inner(typeof(Verse.AI.Group.PsychicRitualGizmo), "<GetGizmos>d__0");
 
             FieldInfo targetField = AccessTools.Field(iteratorType, "target");
 
@@ -127,45 +127,45 @@ public class HarmonyPatches
 
             Map map = Find.CurrentMap;
 
-                if (unlockedRitual.targetsCell)
+            if (unlockedRitual.targetsCell)
+            {
+                Find.Targeter.BeginTargeting(
+                new TargetingParameters
                 {
-                    Find.Targeter.BeginTargeting(
-                    new TargetingParameters
+                    canTargetLocations = true,
+                    canTargetBuildings = false,
+                    canTargetPawns = false,
+                    validator = t =>
                     {
-                        canTargetLocations = true,
-                        canTargetBuildings = false,
-                        canTargetPawns = false,
-                        validator = t =>
-                        {
-                            IntVec3 cell = t.Cell;
-                            return cell.InBounds(map) && unlockedRitual.ExtraCellValidator(cell, t.Map);
-                        }
-                    },
-                    localTarget =>
-                    {
-                        unlockedRitual.targetCell = localTarget.Cell;
-
-                        OriginalActions();
-                    });
-
-                    return false;
-                }
-                else if (unlockedRitual.targetsPawn)
+                        IntVec3 cell = t.Cell;
+                        return cell.InBounds(map) && unlockedRitual.ExtraCellValidator(cell, t.Map);
+                    }
+                },
+                localTarget =>
                 {
-                    Find.Targeter.BeginTargeting(
-                    new TargetingParameters
-                    {
-                        canTargetPawns = true,
-                        canTargetBuildings = false,
-                        validator = t => 
-                            t.Thing is Pawn &&
-                            unlockedRitual.ExtraThingValidator(t.Thing)
-                    },
-                    localTarget =>
-                    {
-                        Pawn pawn = localTarget.Pawn;
-                        if (pawn == null)
-                            return;
+                    unlockedRitual.targetCell = localTarget.Cell;
+
+                    OriginalActions();
+                });
+
+                return false;
+            }
+            else if (unlockedRitual.targetsPawn)
+            {
+                Find.Targeter.BeginTargeting(
+                new TargetingParameters
+                {
+                    canTargetPawns = true,
+                    canTargetBuildings = false,
+                    validator = t =>
+                        t.Thing is Pawn &&
+                        unlockedRitual.ExtraThingValidator(t.Thing)
+                },
+                localTarget =>
+                {
+                    Pawn pawn = localTarget.Pawn;
+                    if (pawn == null)
+                        return;
 
                     unlockedRitual.targetPawn = pawn;
 
@@ -178,24 +178,24 @@ public class HarmonyPatches
             {
                 ThingDef wantedDef = unlockedRitual.targetsThingOfDef;
 
-                    Find.Targeter.BeginTargeting(
-                        new TargetingParameters
-                        {
-                            canTargetPawns = false,
-                            canTargetBuildings = true,
-                            canTargetPlants = true,
-                            canTargetItems = true,
-                            validator = t =>
-                                t.Thing != null &&
-                                t.Thing.def == wantedDef &&
-                                // Probably redundant
-                                //t.Thing.Spawned &&
-                                //t.Thing.Map == map && 
-                                unlockedRitual.ExtraThingValidator(t.Thing)
-                        },
-                        localTarget =>
-                        {
-                            unlockedRitual.targetThing = localTarget.Thing;
+                Find.Targeter.BeginTargeting(
+                    new TargetingParameters
+                    {
+                        canTargetPawns = false,
+                        canTargetBuildings = true,
+                        canTargetPlants = true,
+                        canTargetItems = true,
+                        validator = t =>
+                            t.Thing != null &&
+                            t.Thing.def == wantedDef &&
+                            // Probably redundant
+                            //t.Thing.Spawned &&
+                            //t.Thing.Map == map && 
+                            unlockedRitual.ExtraThingValidator(t.Thing)
+                    },
+                    localTarget =>
+                    {
+                        unlockedRitual.targetThing = localTarget.Thing;
 
                         OriginalActions();
                     });
@@ -214,7 +214,7 @@ public class HarmonyPatches
                         () =>
                         {
                             unlockedRitual.selectedFloatMenuOptionString = item;
-                            
+
                             OriginalActions();
                         }
                         ));
@@ -237,6 +237,15 @@ public class HarmonyPatches
                 psychicRitualDef.InitializeCast(currentMap);
                 Find.WindowStack.Add(new Dialog_BeginPsychicRitual(psychicRitualDef, candidatePool, assignments, currentMap));
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(Game), nameof(Game.FinalizeInit))]
+    public static class Game_FinalizeInit_Patch
+    {
+        public static void Postfix()
+        {
+            CompBiHeatPusherRitualized.psychicRitualManager = Current.Game.GetComponent<GameComponent_PsychicRitualManager>();
         }
     }
 }

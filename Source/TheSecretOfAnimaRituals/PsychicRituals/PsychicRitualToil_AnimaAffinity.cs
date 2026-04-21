@@ -36,6 +36,4 @@ public class PsychicRitualToil_AnimaAffinity : PsychicRitualToil
 
         base.End(psychicRitual, parent, success);
     }
-
-    
 }
