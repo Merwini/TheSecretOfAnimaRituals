@@ -26,11 +26,13 @@ public class CompBiHeatPusherRitualized : CompBiHeatPusher
 
     public override string CompInspectStringExtra()
     {
-        if (GameComponent_AnimaRitual.Instance.flowerPowerEndTick < Find.TickManager.TicksGame)
+        int ticksLeft = GameComponent_AnimaRitual.Instance.flowerPowerEndTick - Find.TickManager.TicksGame;
+
+        if (ticksLeft < 0)
         {
             return "TSOA_FlowerPowerInactive".Translate();
         }
 
-        return base.CompInspectStringExtra();
+        return base.CompInspectStringExtra() + "\n" + "TSOA_FlowerPowerDuration".Translate(ticksLeft.ToStringTicksToDays());
     }
 }

@@ -14,6 +14,7 @@ public class GameComponent_AnimaRitual : GameComponent
     public static GameComponent_AnimaRitual Instance;
 
     public int flowerPowerEndTick = -1;
+    public float flowerPowerMult = 1f;
 
     public GameComponent_AnimaRitual(Game game)
     {
@@ -29,6 +30,7 @@ public class GameComponent_AnimaRitual : GameComponent
     public override void ExposeData()
     {
         Scribe_Values.Look(ref flowerPowerEndTick, "flowerPowerEndTick", -1);
+        Scribe_Values.Look(ref flowerPowerMult, "flowerPowerMult", 1f);
 
         base.ExposeData();
     }
