@@ -24,5 +24,6 @@
 	</modDependencies>
 	<loadAfter>
 		<li>tsoa.core</li>
+		<li>tsoa.totems</li>
 	</loadAfter>
 </ModMetaData>
