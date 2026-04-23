@@ -1,14 +1,16 @@
-﻿using HarmonyLib;
-using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using tsoa.core;
 using Verse;
 using Verse.AI.Group;
+using RimWorld;
+using static RimWorld.PsychicRitualDef_InvocationCircle;
+using HarmonyLib;
 
 namespace tsoa.rituals;
 
@@ -246,6 +248,69 @@ public class HarmonyPatches
         public static void Postfix()
         {
             CompBiHeatPusherRitualized.psychicRitualManager = Current.Game.GetComponent<GameComponent_PsychicRitualManager>();
+        }
+    }
+
+    [HarmonyPatch(typeof(PsychicRitualDef_InvocationCircle), "CalculateMaxPower")]
+    public static class PsychicRitualDef_InvocationCircle_CalculateMaxPower_Postfix
+    {
+        public static void Postfix(PsychicRitualRoleAssignments assignments, List<QualityFactor> powerFactorsOut, ref float power)
+        {
+            if (assignments.Target.Thing is ThingWithComps thing)
+            {
+                CalculateGroupedFacilityQualityOffset(powerFactorsOut, ref power, thing);
+            }
+        }
+
+        private static void CalculateGroupedFacilityQualityOffset(List<QualityFactor> powerFactorsOut, ref float power, ThingWithComps focus)
+        {
+            CompAffectedByGroupedFacilities comp = focus.TryGetComp<CompAffectedByGroupedFacilities>();
+            if (comp == null)
+            {
+                return;
+            }
+
+            Dictionary<ThingDef, RitualQualityOffsetCount> dictionary = new Dictionary<ThingDef, RitualQualityOffsetCount>();
+            List<Thing> groupedFacilitiesListForReading = focus.GetComp<CompAffectedByGroupedFacilities>().LinkedFacilities;
+            for (int i = 0; i < groupedFacilitiesListForReading.Count; i++)
+            {
+                Thing thing = groupedFacilitiesListForReading[i];
+                Log.Warning($"evaluating linked thing {thing.Label}");
+                CompGroupedFacility compGroupedFacility = thing.TryGetComp<CompGroupedFacility>();
+                if (compGroupedFacility?.StatOffsets == null || !compGroupedFacility.CanBeActive)
+                {
+                    Log.Message("continue due to no comp, no StatOffsets, or not active");
+                    continue;
+                }
+                for (int j = 0; j < compGroupedFacility.StatOffsets.Count; j++)
+                {
+                    StatModifier statModifier = compGroupedFacility.StatOffsets[j];
+                    if (statModifier.stat == StatDefOf.PsychicRitualQuality)
+                    {
+                        if (dictionary.TryGetValue(thing.def, out var value))
+                        {
+                            value.count++;
+                            value.offset += statModifier.value;
+                        }
+                        else
+                        {
+                            dictionary.Add(thing.def, new RitualQualityOffsetCount(1, statModifier.value));
+                        }
+                    }
+                }
+            }
+            foreach (KeyValuePair<ThingDef, RitualQualityOffsetCount> item in dictionary)
+            {
+                powerFactorsOut?.Add(new QualityFactor
+                {
+                    label = Find.ActiveLanguageWorker.Pluralize(item.Key.label).CapitalizeFirst(),
+                    positive = true,
+                    count = item.Value.count.ToString(),
+                    quality = item.Value.offset,
+                    toolTip = "PsychicRitualDef_InvocationCircle_QualityFactor_Increase_Tooltip".Translate().CapitalizeFirst().EndWithPeriod()
+                });
+                power += item.Value.offset;
+            }
         }
     }
 }
