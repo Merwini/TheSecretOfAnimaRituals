@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<SoundDef>
+		<defName>TSOA_KodamaCall</defName>
+		<context>MapOnly</context>
+		<sustain>false</sustain>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Kodama/sergequadrado-mechanic-bird-467299</clipPath>
+					
+				</li>
+				</grains>
+				<volumeRange>40~48</volumeRange>
+				<pitchRange>0.9311764~1.068824</pitchRange>
+				<distRange>0~50</distRange>
+				<sustainLoop>False</sustainLoop>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef>
+		<defName>TSOA_KodamaWounded</defName>
+		<context>MapOnly</context>
+		<sustain>false</sustain>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Kodama/sergequadrado-diamonds-467300</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~60</volumeRange>
+				<pitchRange>0.9311764~1.068824</pitchRange>
+				<distRange>0~50</distRange>
+				<repeatMode>NeverTwice</repeatMode>
+				<sustainLoop>False</sustainLoop>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef>
+		<defName>TSOA_KodamaDeath</defName>
+		<context>MapOnly</context>
+		<sustain>false</sustain>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Kodama/sergequadrado-magic-bottles-467302</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~60</volumeRange>
+				<pitchRange>0.9311764~1.068824</pitchRange>
+				<distRange>0~50</distRange>
+				<sustainLoop>False</sustainLoop>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+</Defs>

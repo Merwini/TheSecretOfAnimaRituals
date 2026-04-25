@@ -34,4 +34,8 @@ public class TSOAR_DefOf
     public static WeatherDef SnowGentle;
 
     public static PsychicRitualDef_FlowerPower TSOA_FlowerPowerRitual;
+
+    public static PawnKindDef TSOA_KodamaHaulerKind;
+
+    public static PawnKindDef TSOA_KodamaCleanerKind;
 }

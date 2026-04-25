@@ -16,6 +16,7 @@ public class PsychicRitualToil_Storm : PsychicRitualToil_AnimaAffinity
     public PsychicRitualToil_Storm()
     {
     }
+
     public PsychicRitualToil_Storm(PsychicRitualRoleDef invokerRole)
     {
         this.invokerRole = invokerRole;

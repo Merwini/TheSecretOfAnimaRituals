@@ -64,6 +64,30 @@
 			</points>
 		</flowerCurve>
 	</tsoa.rituals.PsychicRitualDef_FlowerPower>
+
+	<tsoa.rituals.PsychicRitualDef_CreateKodama>
+		<defName>TSOA_CreateKodamaRitual</defName>
+		<label>create kodama</label>
+		<description>Animates bundles of anima tree leaves with psychic energy, creating semi-sentient beings capable of performing specific simple tasks. The energy animating them will dissipate rapidly, returning them to their original state. The number of kodama created is based on the ritual quality and number of participants.</description>
+		<outcomeDescription>At the current ritual quality, the ritual with create between 1 and {0} kodama, with an average of {1}.</outcomeDescription>
+		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
+		<hoursUntilOutcome>1</hoursUntilOutcome>
+		<castableOnPocketMaps>true</castableOnPocketMaps>
+		<requiredOffering>
+			<filter>
+				<thingDefs>
+					<li>TSOA_AnimaGrassResource</li>
+				</thingDefs>
+			</filter>
+			<count>5</count>
+		</requiredOffering>
+		<cooldownHours>120</cooldownHours>
+		<chanterRole>ChanterAdvanced</chanterRole>
+		<ritualFocuses>
+			<li>Plant_TreeAnima</li>
+		</ritualFocuses>
+		<gizmoMakesFloatMenu>true</gizmoMakesFloatMenu>
+	</tsoa.rituals.PsychicRitualDef_CreateKodama>
 	
 	<tsoa.rituals.PsychicRitualDef_Severing>
 		<defName>TSOA_SeveringRitual</defName>

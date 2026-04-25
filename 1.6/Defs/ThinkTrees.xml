@@ -2,14 +2,28 @@
 <Defs>
 
 	<ThinkTreeDef>
-		<defName>TSOA_KodamaCleanerThinktree</defName>
+		<defName>TSOA_KodamaConstant</defName>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
-				
+				<!-- Despawned -->
 				<li Class="ThinkNode_Subtree">
 					<treeDef>Despawned</treeDef>
 				</li>
 
+				<li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+					<subNodes>
+						<li Class="tsoa.rituals.JobGiver_KodamaFlee" />
+					</subNodes>
+				</li>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+	
+	<ThinkTreeDef>
+		<defName>TSOA_KodamaCleanerMain</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+				
 				<li Class="ThinkNode_ConditionalMustKeepLyingDown">
 					<subNodes>
 						<li Class="JobGiver_KeepLyingDown" />
@@ -32,8 +46,6 @@
 					<treeDef>MentalStateNonCritical</treeDef>
 				</li>
 
-				<li Class="JobGiver_AnimalFlee" />
-
 				<li Class="ThinkNode_QueuedJob" />
 
 				<li Class="tsoa.rituals.JobGiver_KodamaClean" />
@@ -54,7 +66,7 @@
 	</ThinkTreeDef>
 	
 	<ThinkTreeDef>
-		<defName>TSOA_KodamaHaulerThinktree</defName>
+		<defName>TSOA_KodamaHaulerMain</defName>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
 				

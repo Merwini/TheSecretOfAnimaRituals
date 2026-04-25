@@ -14,6 +14,10 @@ public class PsychicRitualToil_FlowerPower : PsychicRitualToil_AnimaAffinity
 {
     private PsychicRitualRoleDef invokerRole;
 
+    public PsychicRitualToil_FlowerPower()
+    {
+    }
+
     public PsychicRitualToil_FlowerPower(PsychicRitualRoleDef invokerRole)
     {
         this.invokerRole = invokerRole;
