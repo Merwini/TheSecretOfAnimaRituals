@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="BasePawn" Abstract="True" Name="TSOA_KodamaRaceBase">
+		<label>kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. Has a limited lifespan before the energy animating it dissipates.</description>
+		<statBases>
+			<MoveSpeed>3.4</MoveSpeed>
+			<Flammability>0.75</Flammability>
+			<ToxicResistance>1</ToxicResistance>
+			<PsychicSensitivity>0</PsychicSensitivity>
+			<PainShockThreshold>0.8</PainShockThreshold>
+			<MentalBreakThreshold>0</MentalBreakThreshold>
+			<WorkSpeedGlobal>1.0</WorkSpeedGlobal>
+			<LeatherAmount>0</LeatherAmount>
+			<MeatAmount>0</MeatAmount>
+			<SocialImpact>0</SocialImpact>
+			<GlobalLearningFactor>0</GlobalLearningFactor>
+			<ComfyTemperatureMin>-50</ComfyTemperatureMin>
+			<ComfyTemperatureMax>50</ComfyTemperatureMax>
+			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.0</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.0</ArmorRating_Heat>
+			<CarryingCapacity>65.0</CarryingCapacity>
+			<Mass>10.0</Mass>
+			<VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1.0</VacuumResistance>
+		</statBases>
+		<race>
+			<!-- TODO -->
+			<intelligence>ToolUser</intelligence>
+			<body>QuadrupedAnimalWithPawsAndTail</body>
+			<baseBodySize>0.6</baseBodySize>
+			<hasGenders>false</hasGenders>
+			<bloodDef>Filth_Blood</bloodDef>
+			<bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+			<lifeStageAges>
+				<li>
+					<!-- TODO -->
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<!-- TODO -->
+					<soundWounded>Pawn_Mech_Constructoid_Wounded</soundWounded>
+					<!-- TODO -->
+					<soundDeath>Pawn_Mech_Constructoid_Death</soundDeath>
+					<!-- TODO -->
+					<soundCall>Pawn_Mech_Constructoid_Call</soundCall>
+				</li>
+			</lifeStageAges>
+		</race>
+		<tools>
+			<li>
+				<label>torso</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>5</power>
+				<cooldownTime>2.9</cooldownTime>
+				<linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+	</ThingDef>
+
+	<PawnKindDef ParentName="AnimalKindBase" Abstract="True" Name="TSOA_KodamaKindBase">
+		<combatPower>10</combatPower>
+		<ecoSystemWeight>0</ecoSystemWeight>
+		<canArriveManhunter>false</canArriveManhunter>
+	</PawnKindDef>
+
+	<!-- Hauler -->
+
+	<ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaHaulerRace</defName>
+		<label>hauling kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaHaulerThinktree</thinkTreeMain>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaHaulerKind</defName>
+		<label>hauling kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, hauling. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaHaulerRace</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<!-- TODO -->
+					<texPath>Things/Pawn/Mechanoid/Constructoid</texPath>
+					<!-- TODO -->
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Constructoid</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- Cleaner -->
+
+	<ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaCleanerRace</defName>
+		<label>cleaining kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaCleanerThinktree</thinkTreeMain>
+		</race>
+	</ThingDef>
+	
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaCleanerKind</defName>
+		<label>cleaining kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, cleaning. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaCleanerRace</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<!-- TODO -->
+					<texPath>Things/Pawn/Mechanoid/Constructoid</texPath>
+					<!-- TODO -->
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Constructoid</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+	
+</Defs>
