@@ -17,52 +17,27 @@ public class JobGiver_KodamaClean : ThinkNode_JobGiver
     public override Job TryGiveJob(Pawn pawn)
     {
         Map map = pawn.Map;
+        IEnumerable<Thing> filth = map.listerFilthInHomeArea.FilthInHomeArea;
 
-        if (pawn.Map == null || pawn.Downed)
-        {
+        if (filth.Count() == 0)
             return null;
-        }
 
         Predicate<Thing> validator = thing =>
         {
-            if (thing == null || !thing.Spawned || thing.Map != pawn.Map)
-                return false;
-
-            IntVec3 cell = thing.Position;
-
-            if (!map.areaManager.Home[cell])
-            {
-                return false;
-            }
-
-            if (cell.Fogged(map))
-                return false;
-
-            if (cell.IsForbidden(pawn))
-                return false;
-
-            if (!pawn.CanReserve(thing))
-                return false;
-
-            if (!pawn.CanReach(thing, PathEndMode.Touch, Danger.Some))
-                return false;
-
-            return true;
+            return Worker.HasJobOnThing(pawn,thing);
         };
 
-        Thing target = GenClosest.ClosestThingReachable(
+        Thing target = GenClosest.ClosestThing_Global_Reachable(
             pawn.Position,
             map,
-            ThingRequest.ForGroup(ThingRequestGroup.Filth),
-            PathEndMode.Touch,
-            TraverseParms.For(pawn, Danger.Some),
+            filth,
+            Worker.PathEndMode,
+            TraverseParms.For(pawn, Worker.MaxPathDanger(pawn)),
             validator: validator
         );
 
         if (target == null)
-        {
             return null;
-        }
 
         return Worker.JobOnThing(pawn, target);
     }
