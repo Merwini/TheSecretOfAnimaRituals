@@ -136,7 +136,7 @@
 			<li>
 				<bodyGraphicData>
 					<texPath>TSOA/Things/Pawn/Kodama/Kodama</texPath>
-					<drawSize>2.0</drawSize>
+					<drawSize>1.5</drawSize>
 				</bodyGraphicData>
 			</li>
 		</lifeStages>
