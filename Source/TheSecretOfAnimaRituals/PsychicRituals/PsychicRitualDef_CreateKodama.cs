@@ -76,6 +76,7 @@ public class PsychicRitualDef_CreateKodama : PsychicRitualDef_Unlocked
         {
             dict[WorkTypeDefOf.Cleaning] = TSOAR_DefOf.TSOA_KodamaCleanerKind;
             dict[WorkTypeDefOf.Hauling] = TSOAR_DefOf.TSOA_KodamaHaulerKind;
+            dict[WorkTypeDefOf.PlantCutting] = TSOAR_DefOf.TSOA_KodamaCutterKind;
         }
     }
 }

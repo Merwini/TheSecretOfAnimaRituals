@@ -117,6 +117,58 @@
 			</subNodes>
 		</thinkRoot>
 	</ThinkTreeDef>
-	
+
+	<ThinkTreeDef>
+		<defName>TSOA_KodamaCutterMain</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Despawned</treeDef>
+				</li>
+
+				<li Class="ThinkNode_ConditionalMustKeepLyingDown">
+					<subNodes>
+						<li Class="JobGiver_KeepLyingDown" />
+					</subNodes>
+				</li>
+
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Downed</treeDef>
+				</li>
+
+				<li Class="ThinkNode_Subtree">
+					<treeDef>BurningResponse</treeDef>
+				</li>
+
+				<li Class="ThinkNode_Subtree">
+					<treeDef>MentalStateCritical</treeDef>
+				</li>
+
+				<li Class="ThinkNode_Subtree">
+					<treeDef>MentalStateNonCritical</treeDef>
+				</li>
+
+				<li Class="JobGiver_ReactToCloseMeleeThreat" />
+
+				<li Class="ThinkNode_QueuedJob" />
+
+				<li Class="tsoa.rituals.JobGiver_KodamaCut">
+				</li>
+
+				<li Class="ThinkNode_Tagger">
+					<tagToGive>Idle</tagToGive>
+					<subNodes>
+						<li Class="JobGiver_WanderAnywhere">
+							<maxDanger>Deadly</maxDanger>
+							<ticksBetweenWandersRange>300~600</ticksBetweenWandersRange>
+						</li>
+					</subNodes>
+				</li>
+
+				<li Class="JobGiver_IdleError"/>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
 	
 </Defs>

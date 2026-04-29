@@ -38,4 +38,6 @@ public class TSOAR_DefOf
     public static PawnKindDef TSOA_KodamaHaulerKind;
 
     public static PawnKindDef TSOA_KodamaCleanerKind;
+
+    public static PawnKindDef TSOA_KodamaCutterKind;
 }

@@ -175,5 +175,22 @@
 		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, cleaning. Has a limited lifespan before the energy animating it dissipates.</description>
 		<race>TSOA_KodamaCleanerRace</race>
 	</PawnKindDef>
+
+	<!-- Cutter -->
+
+	<ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaCutterRace</defName>
+		<label>cutting kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaCutterMain</thinkTreeMain>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaCutterKind</defName>
+		<label>cutting kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, plant cutting. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaCutterRace</race>
+	</PawnKindDef>
 	
 </Defs>
