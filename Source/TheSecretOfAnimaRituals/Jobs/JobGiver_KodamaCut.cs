@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
-using Verse.Noise;
 
 namespace tsoa.rituals;
 
@@ -50,7 +49,7 @@ public class JobGiver_KodamaCut : ThinkNode_JobGiver
         return DesignatedWorker.JobOnThing(pawn, target);
     }
 
-    // Cobbled together from JobGiver_Work.TryIssueJobPackage and JobGiver_GrowerHarvest.TryGiveJob
+    // Cobbled together from JobGiver_Work.TryIssueJobPackage and WorkGiver_GrowerHarvest.TryGiveJob
     private Job TryGiveHarvestJob(Pawn pawn)
     {
         IEnumerable<IntVec3> potentialCells = HarvestGrowZoneWorker.PotentialWorkCellsGlobal(pawn);
