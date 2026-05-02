@@ -42,4 +42,7 @@ public class TSOAR_DefOf
     public static PawnKindDef TSOA_KodamaCleanerKind;
 
     public static PawnKindDef TSOA_KodamaCutterKind;
+
+    [MayRequireIdeology]
+    public static MemeDef Blindsight;
 }

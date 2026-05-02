@@ -275,7 +275,6 @@ public class HarmonyPatches
             for (int i = 0; i < groupedFacilitiesListForReading.Count; i++)
             {
                 Thing thing = groupedFacilitiesListForReading[i];
-                Log.Warning($"evaluating linked thing {thing.Label}");
                 CompGroupedFacility compGroupedFacility = thing.TryGetComp<CompGroupedFacility>();
                 if (compGroupedFacility?.StatOffsets == null || !compGroupedFacility.CanBeActive)
                 {

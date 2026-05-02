@@ -49,6 +49,9 @@ public class PsychicRitualToil_Regrowth : PsychicRitualToil_AnimaAffinity
         {
             if (hediff is Hediff_MissingPart mp && mp.Part != null)
             {
+                if (ModsConfig.IdeologyActive && targetPawn.Ideo != null && targetPawn.Ideo.HasMeme(TSOAR_DefOf.Blindsight) && mp.Part.def == BodyPartDefOf.Eye)
+                    continue;
+
                 missingParts.Add(hediff);
                 continue;
             }
