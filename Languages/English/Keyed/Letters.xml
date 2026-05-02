@@ -5,6 +5,8 @@
 	<TSOA_RelocateFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. The anima tree has been skipgated, but not to the desired location.</TSOA_RelocateFailure>
 
 	<TSOA_FlowerPowerSuccess>{0_nameDef} has completed performing {RITUAL_definite}. For the next {1} days, anima flowers on this map will be able to influence the temperature of the room they're in. Based on ritual quality, their heating and cooling power is multiplied by {2}.</TSOA_FlowerPowerSuccess>
+
+	<TSOA_CreateKodamaSuccess>{0_nameDef} has completed performing {RITUAL_definite}. The ritual participants have managed to animate {1} kodama with psychic energy. This energy will dissipate after 3 days, and the kodama will disappear.</TSOA_CreateKodamaSuccess>
 	
 	<TSOA_SeveringSuccess>{0_nameDef} has completed performing {RITUAL_definite} ritual successfully. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringSuccess>
 	<TSOA_SeveringFailure>{0_nameDef} has completed performing {RITUAL_definite} ritual, but failed to control it. For the next {1} days, all colonists will be psychically deafened.</TSOA_SeveringFailure>

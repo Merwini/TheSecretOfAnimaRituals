@@ -8,6 +8,7 @@ using tsoa.core;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using static UnityEngine.GraphicsBuffer;
 
 namespace tsoa.rituals;
 
@@ -31,8 +32,10 @@ public class PsychicRitualToil_CreateKodama : PsychicRitualToil_AnimaAffinity
         base.Start(psychicRitual, parent);
 
         Pawn invoker = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
+        //psychicRitual.assignments.AssignedPawnCount
+        int maxKodama = 7;
         int kodamaCount = 1;
-        for (int i = 0; i < psychicRitual.assignments.AssignedPawnCount - 1; i++)
+        for (int i = 0; i < maxKodama - 1; i++)
         {
             if (Rand.Chance(psychicRitual.PowerPercent))
             {
@@ -59,9 +62,11 @@ public class PsychicRitualToil_CreateKodama : PsychicRitualToil_AnimaAffinity
         {
             Pawn kodama = PawnGenerator.GeneratePawn(kind, Faction.OfPlayer);
             GenSpawn.Spawn(kodama, invoker.Position, invoker.Map);
+            Hediff hediff = HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_KodamaLifespan, kodama);
+            kodama.health.AddHediff(hediff);
         }
 
-        // TODO letter
+        Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), "TSOA_CreateKodamaSuccess".Translate(psychicRitual.assignments.FirstAssignedPawn(invokerRole), kodamaCount, psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
     }
 
     public override void ExposeData()

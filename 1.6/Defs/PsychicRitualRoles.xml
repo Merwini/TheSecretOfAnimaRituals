@@ -26,5 +26,13 @@
 		<applyPowerOffset>false</applyPowerOffset>
 		<removeOnLost>false</removeOnLost>
 	</PsychicRitualRoleDef>
+
+	<PsychicRitualRoleDef ParentName="ChanterBase">
+		<defName>TSOA_ChanterUnlimited</defName>
+		<label>chanter</label>
+		<allowedCount>0~9999</allowedCount>
+		<applyPowerOffset>false</applyPowerOffset>
+		<removeOnLost>false</removeOnLost>
+	</PsychicRitualRoleDef>
 	
 </Defs>

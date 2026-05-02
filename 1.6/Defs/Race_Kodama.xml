@@ -90,6 +90,8 @@
 		</statBases>
 		<race>
 			<intelligence>ToolUser</intelligence>
+			<trainability>None</trainability>
+			<needsRest>false</needsRest>
 			<body>TSOA_KodamaBody</body>
 			<thinkTreeConstant>TSOA_KodamaConstant</thinkTreeConstant>
 			<baseBodySize>0.6</baseBodySize>

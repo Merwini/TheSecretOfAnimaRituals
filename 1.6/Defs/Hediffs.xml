@@ -132,4 +132,22 @@
 		</stages>
 	</HediffDef>
 	
+	<!-- Kodama Lifespan -->
+	<HediffDef>
+		<defName>TSOA_KodamaLifespan</defName>
+		<label>limited lifespan</label>
+		<description>Kodama are not real living creatures, they are constructs animated by pschic energy. When that energy runs out, they will revert to an inanimate state.</description>
+		<hediffClass>tsoa.rituals.Hediff_KodamaLifespan</hediffClass>
+		<isBad>false</isBad>
+		<tendable>false</tendable>
+		<displayWound>false</displayWound>
+		<modExtensions>
+			<li Class ="tsoa.rituals.HediffDefExtension_KodamaLifetime">
+				<lifespanDays>3</lifespanDays>
+				<vanishEffecter>ForcedVisible</vanishEffecter>
+				<vanishSound>PsychicRitual_Interrupted</vanishSound>
+			</li>
+		</modExtensions>
+	</HediffDef>
+	
 </Defs>

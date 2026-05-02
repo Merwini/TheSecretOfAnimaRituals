@@ -23,6 +23,8 @@ public class TSOAR_DefOf
 
     public static HediffDef TSOA_RegrowingPart;
 
+    public static HediffDef TSOA_KodamaLifespan;
+
     public static WeatherDef Rain;
 
     public static WeatherDef RainyThunderstorm;

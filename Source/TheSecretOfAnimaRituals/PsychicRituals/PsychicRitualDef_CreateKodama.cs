@@ -49,7 +49,8 @@ public class PsychicRitualDef_CreateKodama : PsychicRitualDef_Unlocked
     }
     public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
     {
-        int max = assignments.AssignedPawnCount;
+        //int max = assignments.AssignedPawnCount;
+        int max = 7;
         int average = Mathf.FloorToInt(max * qualityRange.min);
         return outcomeDescription.Formatted(max, average);
     }
