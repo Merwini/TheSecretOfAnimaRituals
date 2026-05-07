@@ -16,6 +16,8 @@ public class GameComponent_AnimaRitual : GameComponent
     public int flowerPowerEndTick = -1;
     public float flowerPowerMult = 1f;
 
+    public int hungryGraveEndTick = -1;
+
     public GameComponent_AnimaRitual(Game game)
     {
     }
@@ -31,6 +33,8 @@ public class GameComponent_AnimaRitual : GameComponent
     {
         Scribe_Values.Look(ref flowerPowerEndTick, "flowerPowerEndTick", -1);
         Scribe_Values.Look(ref flowerPowerMult, "flowerPowerMult", 1f);
+
+        Scribe_Values.Look(ref hungryGraveEndTick, "hungryGraveEndTick", -1);
 
         base.ExposeData();
     }

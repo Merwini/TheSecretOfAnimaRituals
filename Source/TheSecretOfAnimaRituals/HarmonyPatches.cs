@@ -242,14 +242,14 @@ public class HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(Game), nameof(Game.FinalizeInit))]
-    public static class Game_FinalizeInit_Patch
-    {
-        public static void Postfix()
-        {
-            CompBiHeatPusherRitualized.psychicRitualManager = Current.Game.GetComponent<GameComponent_PsychicRitualManager>();
-        }
-    }
+    //[HarmonyPatch(typeof(Game), nameof(Game.FinalizeInit))]
+    //public static class Game_FinalizeInit_Patch
+    //{
+    //    public static void Postfix()
+    //    {
+    //        CompBiHeatPusherRitualized.psychicRitualManager = Current.Game.GetComponent<GameComponent_PsychicRitualManager>();
+    //    }
+    //}
 
     [HarmonyPatch(typeof(PsychicRitualDef_InvocationCircle), "CalculateMaxPower")]
     public static class PsychicRitualDef_InvocationCircle_CalculateMaxPower_Postfix

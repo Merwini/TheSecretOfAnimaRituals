@@ -12,7 +12,7 @@ namespace tsoa.rituals;
 public class PsychicRitualDef_Animagenesis : PsychicRitualDef_Unlocked
 {
     public SimpleCurve successCurve;
-    public int minimumAffinity = 20;
+    public float minimumAffinity = 0.2f;
 
     public override IEnumerable<string> BlockingIssues(PsychicRitualRoleAssignments assignments, Map map)
     {
@@ -26,7 +26,7 @@ public class PsychicRitualDef_Animagenesis : PsychicRitualDef_Unlocked
 
         if (hediff == null || hediff.CurrentAffinity < minimumAffinity)
         {
-            yield return "TSOA_AnimagenesisRitualBlocker".Translate(minimumAffinity);
+            yield return "TSOA_AnimagenesisRitualBlocker".Translate(minimumAffinity * 100);
         }
     }
 
