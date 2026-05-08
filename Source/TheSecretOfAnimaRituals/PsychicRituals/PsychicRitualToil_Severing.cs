@@ -47,7 +47,7 @@ public class PsychicRitualToil_Severing : PsychicRitualToil_AnimaAffinity
             }
             else
             {
-                hediff.Severity = Rand.Range(failureDurationDays.min * severityPerDay, failureDurationDays.max * -severityPerDay);
+                hediff.Severity = Rand.Range(failureDurationDays.min * -severityPerDay, failureDurationDays.max * -severityPerDay);
             }
             Hediff existing = humanLike.health.hediffSet.GetFirstHediffOfDef(TSOAR_DefOf.TSOA_PsychicSevering);
             if (existing != null)
