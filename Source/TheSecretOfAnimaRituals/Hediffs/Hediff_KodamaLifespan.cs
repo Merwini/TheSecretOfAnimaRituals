@@ -24,11 +24,6 @@ public class Hediff_KodamaLifespan : Hediff
 
         if (ticksRemaining <= 0)
         {
-            pawn.Kill(null);
-        }
-
-        if (pawn.Dead)
-        {
             Vanish();
         }
     }
@@ -85,14 +80,16 @@ public class Hediff_KodamaLifespan : Hediff
 
         if (map != null)
         {
-            Props.vanishSound?.PlayOneShot(new TargetInfo(pos, map));
+            Props?.vanishSound?.PlayOneShot(new TargetInfo(pos, map));
 
-            if (Props.vanishEffecter != null)
+            if (Props?.vanishEffecter != null)
             {
-                Effecter effecter = Props.vanishEffecter.Spawn();
+                Effecter effecter = Props.vanishEffecter.SpawnMaintained(pos, map);
                 effecter.Trigger(new TargetInfo(pos, map), TargetInfo.Invalid);
-                effecter.Cleanup();
             }
+
+            
+            SpawnVanishFilth(map, pos);
         }
 
         if (pawn.Corpse != null && !pawn.Corpse.Destroyed)
@@ -105,6 +102,29 @@ public class Hediff_KodamaLifespan : Hediff
             pawn.Destroy(DestroyMode.Vanish);
         }
     }
+
+    private void SpawnVanishFilth(Map map, IntVec3 pos)
+    {
+        if (Props?.vanishFilth == null)
+        {
+            return;
+        }
+
+        FilthMaker.TryMakeFilth(pos, map, Props.vanishFilth);
+
+        int extraFilthCount = Props.vanishFilthCountRange.RandomInRange;
+        for (int i = 0; i < extraFilthCount; i++)
+        {
+            IntVec3 cell = CellFinder.RandomClosewalkCellNear(pos, map, 2);
+
+            if (!cell.InBounds(map))
+            {
+                continue;
+            }
+
+            FilthMaker.TryMakeFilth(cell, map, Props.vanishFilth);
+        }
+    }
 }
 
 public class HediffDefExtension_KodamaLifetime : DefModExtension
@@ -112,4 +132,6 @@ public class HediffDefExtension_KodamaLifetime : DefModExtension
     public int lifespanDays;
     public EffecterDef vanishEffecter;
     public SoundDef vanishSound;
+    public ThingDef vanishFilth;
+    public IntRange vanishFilthCountRange;
 }

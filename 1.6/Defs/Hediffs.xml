@@ -146,6 +146,9 @@
 				<lifespanDays>3</lifespanDays>
 				<vanishEffecter>ForcedVisible</vanishEffecter>
 				<vanishSound>PsychicRitual_Interrupted</vanishSound>
+				<!-- Placeholder, TODO make leafy filth -->
+				<vanishFilth>Filth_Ash</vanishFilth>
+				<vanishFilthCountRange>2~6</vanishFilthCountRange>
 			</li>
 		</modExtensions>
 	</HediffDef>
