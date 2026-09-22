@@ -47,7 +47,13 @@ public class PsychicRitualDef_Regrowth : PsychicRitualDef_Unlocked
         foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
         {
             if (hediff is Hediff_MissingPart mp)
+            {
+                // Skip regrowing eyes for Blindsight pawns
+                if (ModsConfig.IdeologyActive && targetPawn.Ideo != null && pawn.Ideo.HasMeme(TSOAR_DefOf.Blindsight) && mp.Part.def == BodyPartDefOf.Eye)
+                    continue;
+
                 return true;
+            }
 
             if (hediff is Hediff_Injury injury && injury.IsPermanent())
                 return true;
