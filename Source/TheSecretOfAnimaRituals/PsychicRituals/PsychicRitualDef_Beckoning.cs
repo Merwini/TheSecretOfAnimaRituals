@@ -16,6 +16,7 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
 
     private TraderKindDef chosenTraderKind;
     private List<Faction> eligibleFactions = new List<Faction>();
+    private readonly Dictionary<string, TraderKindDef> traderDict = new Dictionary<string, TraderKindDef>();
 
     public override List<string> FloatMenuOptionStrings
     {
@@ -24,9 +25,9 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
             List<string> options = new List<string>();
             if (advancedResearchProject.IsFinished)
             {
-                foreach (var kind in DefDatabase<TraderKindDef>.AllDefs)
+                foreach (var kvp in traderDict)
                 {
-                    options.Add(kind.label);
+                    options.Add(kvp.Key);
                 }
             }
 
@@ -36,7 +37,7 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
             {
                 foreach (Faction faction in Find.FactionManager.AllFactionsVisible)
                 {
-                    if (!faction.def.caravanTraderKinds.NullOrEmpty() && faction.def.caravanTraderKinds.Any(tk => tk.label == option))
+                    if (!faction.def.caravanTraderKinds.NullOrEmpty() && faction.def.caravanTraderKinds.Contains(traderDict[option]))
                     {
                         filteredOptions.Add(option);
                         break;
@@ -87,7 +88,25 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
     // Will return null if "any trader" is selected
     private TraderKindDef ResolveTraderKind(string chosen)
     {
-        return DefDatabase<TraderKindDef>.AllDefs.FirstOrDefault(tk => tk.label == chosen);
+        return traderDict.TryGetValue(chosen);
+    }
+
+    public override void PostLoad()
+    {
+        base.PostLoad();
+
+        traderDict.Clear();
+        foreach (var kind in DefDatabase<TraderKindDef>.AllDefs)
+        {
+            string optionLabel = kind.label;
+            int suffix = 2;
+            while (traderDict.ContainsKey(optionLabel) || optionLabel == anyTraderOptionString)
+            {
+                optionLabel = $"{kind.label} {suffix++}";
+            }
+
+            traderDict[optionLabel] = kind;
+        }
     }
 
     public static List<Faction> GetFactionsThatCanSendTraderKind(Map map, TraderKindDef chosenKind)

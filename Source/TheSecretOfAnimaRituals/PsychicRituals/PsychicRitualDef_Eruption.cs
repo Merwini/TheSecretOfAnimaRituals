@@ -17,6 +17,8 @@ public class PsychicRitualDef_Eruption : PsychicRitualDef_Unlocked
 
     private ThingDef chosenOreDef;
 
+    private readonly Dictionary<string, ThingDef> oreDict = new Dictionary<string, ThingDef>();
+
     public override List<string> FloatMenuOptionStrings
     {
         get
@@ -26,9 +28,9 @@ public class PsychicRitualDef_Eruption : PsychicRitualDef_Unlocked
 
             if (advancedResearchProject.IsFinished)
             {
-                foreach (var ore in DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock))
+                foreach (var kvp in oreDict)
                 {
-                    options.Add(ore.label);
+                    options.Add(kvp.Key);
                 }
             }
 
@@ -61,6 +63,24 @@ public class PsychicRitualDef_Eruption : PsychicRitualDef_Unlocked
 
     private ThingDef ResolveOreDef(string chosen)
     {
-        return DefDatabase<ThingDef>.AllDefs.FirstOrDefault(td => td.label == chosen);
+        return oreDict.TryGetValue(chosen);
+    }
+
+    public override void PostLoad()
+    {
+        base.PostLoad();
+
+        oreDict.Clear();
+        foreach (var ore in DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock))
+        {
+            string optionLabel = ore.label;
+            int suffix = 2;
+            while (oreDict.ContainsKey(optionLabel) || optionLabel == anyOreOptionString)
+            {
+                optionLabel = $"{ore.label} {suffix++}";
+            }
+
+            oreDict[optionLabel] = ore;
+        }
     }
 }
