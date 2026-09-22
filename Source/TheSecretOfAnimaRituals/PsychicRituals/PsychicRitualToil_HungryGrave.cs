@@ -42,4 +42,10 @@ public class PsychicRitualToil_HungryGrave : PsychicRitualToil_AnimaAffinity
 
         Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), "TSOA_HungryGraveSuccess".Translate(psychicRitual.assignments.FirstAssignedPawn(invokerRole), durationHours.ToString("F1"), psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
     }
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        Scribe_Defs.Look(ref invokerRole, "invokerRole");
+    }
 }
