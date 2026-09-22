@@ -23,7 +23,7 @@ public class TSOAR_DefOf
 
     public static HediffDef TSOA_RegrowingPart;
 
-    public static HediffDef TSOA_KodamaLifespan;
+    // public static HediffDef TSOA_KodamaLifespan;
 
     public static WeatherDef Rain;
 
@@ -37,11 +37,11 @@ public class TSOAR_DefOf
 
     public static PsychicRitualDef_FlowerPower TSOA_FlowerPowerRitual;
 
-    public static PawnKindDef TSOA_KodamaHaulerKind;
+    // public static PawnKindDef TSOA_KodamaHaulerKind;
 
-    public static PawnKindDef TSOA_KodamaCleanerKind;
+    // public static PawnKindDef TSOA_KodamaCleanerKind;
 
-    public static PawnKindDef TSOA_KodamaCutterKind;
+    // public static PawnKindDef TSOA_KodamaCutterKind;
 
     [MayRequireIdeology]
     public static MemeDef Blindsight;

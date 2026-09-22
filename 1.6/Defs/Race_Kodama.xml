@@ -1,7 +1,7 @@
-﻿<!-- <?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<BodyDef>
+	<!-- <BodyDef>
 		<defName>TSOA_KodamaBody</defName>
 		<label>kodama</label>
 		<corePart>
@@ -142,11 +142,11 @@
 				</bodyGraphicData>
 			</li>
 		</lifeStages>
-	</PawnKindDef>
+	</PawnKindDef> -->
 
 	<!-- Hauler -->
 
-	<ThingDef ParentName="TSOA_KodamaRaceBase">
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
 		<defName>TSOA_KodamaHaulerRace</defName>
 		<label>hauling kodama</label>
 		<race>
@@ -159,11 +159,11 @@
 		<label>hauling kodama</label>
 		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, hauling. Has a limited lifespan before the energy animating it dissipates.</description>
 		<race>TSOA_KodamaHaulerRace</race>
-	</PawnKindDef>
+	</PawnKindDef> -->
 
 	<!-- Cleaner -->
 
-	<ThingDef ParentName="TSOA_KodamaRaceBase">
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
 		<defName>TSOA_KodamaCleanerRace</defName>
 		<label>cleaning kodama</label>
 		<race>
@@ -176,11 +176,11 @@
 		<label>cleaning kodama</label>
 		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, cleaning. Has a limited lifespan before the energy animating it dissipates.</description>
 		<race>TSOA_KodamaCleanerRace</race>
-	</PawnKindDef>
+	</PawnKindDef> -->
 
 	<!-- Cutter -->
 
-	<ThingDef ParentName="TSOA_KodamaRaceBase">
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
 		<defName>TSOA_KodamaCutterRace</defName>
 		<label>cutting kodama</label>
 		<race>
@@ -193,6 +193,6 @@
 		<label>cutting kodama</label>
 		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, plant cutting. Has a limited lifespan before the energy animating it dissipates.</description>
 		<race>TSOA_KodamaCutterRace</race>
-	</PawnKindDef>
+	</PawnKindDef> -->
 	
-</Defs> -->
+</Defs>

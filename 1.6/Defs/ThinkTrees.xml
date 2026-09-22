@@ -1,11 +1,10 @@
-﻿<!-- <?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<ThinkTreeDef>
+	<!-- <ThinkTreeDef>
 		<defName>TSOA_KodamaConstant</defName>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
-				<!-- Despawned -->
 				<li Class="ThinkNode_Subtree">
 					<treeDef>Despawned</treeDef>
 				</li>
@@ -17,9 +16,9 @@
 				</li>
 			</subNodes>
 		</thinkRoot>
-	</ThinkTreeDef>
+	</ThinkTreeDef> -->
 	
-	<ThinkTreeDef>
+	<!-- <ThinkTreeDef>
 		<defName>TSOA_KodamaCleanerMain</defName>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
@@ -169,6 +168,6 @@
 				<li Class="JobGiver_IdleError"/>
 			</subNodes>
 		</thinkRoot>
-	</ThinkTreeDef>
+	</ThinkTreeDef> -->
 	
-</Defs> -->
+</Defs>
