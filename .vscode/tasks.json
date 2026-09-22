@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build mod (Debug)",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/Source/TheSecretOfAnimaRituals/TheSecretOfAnimaRituals.csproj", "--configuration", "Debug"],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "Build mod (Release to 1.6/Assemblies)",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/Source/TheSecretOfAnimaRituals/TheSecretOfAnimaRituals.csproj", "--configuration", "Release"],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    }
+  ]
+}
