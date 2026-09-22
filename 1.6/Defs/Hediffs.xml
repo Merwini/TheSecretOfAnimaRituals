@@ -133,7 +133,7 @@
 	</HediffDef>
 	
 	<!-- Kodama Lifespan -->
-	<HediffDef>
+	<!-- <HediffDef>
 		<defName>TSOA_KodamaLifespan</defName>
 		<label>limited lifespan</label>
 		<description>Kodama are not real living creatures, they are constructs animated by pschic energy. When that energy runs out, they will revert to an inanimate state.</description>
@@ -151,6 +151,6 @@
 				<vanishFilthCountRange>2~6</vanishFilthCountRange>
 			</li>
 		</modExtensions>
-	</HediffDef>
+	</HediffDef> -->
 	
 </Defs>

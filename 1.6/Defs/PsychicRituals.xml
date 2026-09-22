@@ -97,7 +97,7 @@
 		</graveCurve>
 	</tsoa.rituals.PsychicRitualDef_HungryGrave>
 
-	<tsoa.rituals.PsychicRitualDef_CreateKodama>
+	<!-- <tsoa.rituals.PsychicRitualDef_CreateKodama>
 		<defName>TSOA_CreateKodamaRitual</defName>
 		<label>create kodama</label>
 		<description>Animates bundles of anima tree leaves with psychic energy, creating semi-sentient beings capable of performing specific simple tasks. The energy animating them will dissipate rapidly, returning them to their original state. The number of kodama created is based on the ritual quality.</description>
@@ -119,7 +119,7 @@
 			<li>Plant_TreeAnima</li>
 		</ritualFocuses>
 		<gizmoMakesFloatMenu>true</gizmoMakesFloatMenu>
-	</tsoa.rituals.PsychicRitualDef_CreateKodama>
+	</tsoa.rituals.PsychicRitualDef_CreateKodama> -->
 	
 	<tsoa.rituals.PsychicRitualDef_Severing>
 		<defName>TSOA_SeveringRitual</defName>
