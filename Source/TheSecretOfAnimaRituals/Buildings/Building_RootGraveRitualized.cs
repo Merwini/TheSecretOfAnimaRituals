@@ -12,12 +12,25 @@ namespace tsoa.rituals;
 public class Building_RootGraveRitualized : Building_RootGrave
 {
     private const float hungryGraveConsumeMult = 10f;
+    private MapComponent_AnimaRitual mapComp;
+
+    public override void SpawnSetup(Map map, bool respawningAfterLoad)
+    {
+        base.SpawnSetup(map, respawningAfterLoad);
+        mapComp = map.GetComponent<MapComponent_AnimaRitual>();
+    }
+
+    public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+    {
+        mapComp = null;
+        base.DeSpawn(mode);
+    }
 
     public override float ConsumeRate
     {
         get
         {
-            if (GameComponent_AnimaRitual.Instance.hungryGraveEndTick < Find.TickManager.TicksGame)
+            if (mapComp == null || mapComp.hungryGraveEndTick <= Find.TickManager.TicksGame)
             {
                 return ProgressPerTick;
             }

@@ -38,7 +38,7 @@ public class PsychicRitualToil_HungryGrave : PsychicRitualToil_AnimaAffinity
 
     private void ApplyOutcome(PsychicRitual psychicRitual, PsychicRitualRoleDef invokerRole, float durationHours)
     {
-        GameComponent_AnimaRitual.Instance.hungryGraveEndTick = Find.TickManager.TicksGame + Mathf.RoundToInt(durationHours * GenDate.TicksPerHour);
+        psychicRitual.Map.GetComponent<MapComponent_AnimaRitual>().hungryGraveEndTick = Find.TickManager.TicksGame + Mathf.RoundToInt(durationHours * GenDate.TicksPerHour);
 
         Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), "TSOA_HungryGraveSuccess".Translate(psychicRitual.assignments.FirstAssignedPawn(invokerRole), durationHours.ToString("F1"), psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
     }

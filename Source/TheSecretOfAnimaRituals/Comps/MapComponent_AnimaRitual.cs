@@ -9,24 +9,15 @@ using RimWorld.Planet;
 
 namespace tsoa.rituals;
 
-public class GameComponent_AnimaRitual : GameComponent
+public class MapComponent_AnimaRitual : MapComponent
 {
-    public static GameComponent_AnimaRitual Instance;
-
     public int flowerPowerEndTick = -1;
     public float flowerPowerMult = 1f;
 
     public int hungryGraveEndTick = -1;
 
-    public GameComponent_AnimaRitual(Game game)
+    public MapComponent_AnimaRitual(Map map) : base(map)
     {
-    }
-
-    public override void FinalizeInit()
-    {
-        Instance = this;
-
-        base.FinalizeInit();
     }
 
     public override void ExposeData()

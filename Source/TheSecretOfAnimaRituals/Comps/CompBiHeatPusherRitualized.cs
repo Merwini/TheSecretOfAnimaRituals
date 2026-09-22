@@ -11,11 +11,25 @@ namespace tsoa.rituals;
 
 public class CompBiHeatPusherRitualized : CompBiHeatPusher
 {
-    protected override float HeatPerSecond => base.HeatPerSecond * GameComponent_AnimaRitual.Instance.flowerPowerMult;
+    private MapComponent_AnimaRitual mapComp;
+
+    public override void PostSpawnSetup(bool respawningAfterLoad)
+    {
+        base.PostSpawnSetup(respawningAfterLoad);
+        mapComp = parent.Map.GetComponent<MapComponent_AnimaRitual>();
+    }
+
+    public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+    {
+        mapComp = null;
+        base.PostDeSpawn(map, mode);
+    }
+
+    protected override float HeatPerSecond => base.HeatPerSecond * (mapComp?.flowerPowerMult ?? 1f);
 
     public override bool ShouldPushHeatNow(out float temperature)
     {
-        if (GameComponent_AnimaRitual.Instance.flowerPowerEndTick < Find.TickManager.TicksGame)
+        if (mapComp == null || mapComp.flowerPowerEndTick <= Find.TickManager.TicksGame)
         {
             temperature = 0;
             return false;
@@ -26,8 +40,8 @@ public class CompBiHeatPusherRitualized : CompBiHeatPusher
 
     public override string CompInspectStringExtra()
     {
-        int ticksLeft = GameComponent_AnimaRitual.Instance.flowerPowerEndTick - Find.TickManager.TicksGame;
-        if (ticksLeft < 0)
+        int ticksLeft = (mapComp?.flowerPowerEndTick ?? -1) - Find.TickManager.TicksGame;
+        if (ticksLeft <= 0)
         {
             return "TSOA_FlowerPowerInactive".Translate();
         }
