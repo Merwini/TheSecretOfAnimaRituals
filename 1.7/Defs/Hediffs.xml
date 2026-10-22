@@ -43,7 +43,7 @@
 		<description>A psychically-induced fever that supercharges immune response, but will cause the patient to die if not tended frequently. Leaves the patient dilirious and unable to medically care for themself or others.</description>
 		<tendable>true</tendable>
 		<isBad>true</isBad>
-		<initialSeverity>0</initialSeverity>
+		<initialSeverity>0.0001</initialSeverity>
 		<lethalSeverity>1.0</lethalSeverity>
 		<stages>
 			<li>
