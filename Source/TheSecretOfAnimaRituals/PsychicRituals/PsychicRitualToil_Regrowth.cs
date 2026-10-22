@@ -72,9 +72,13 @@ public class PsychicRitualToil_Regrowth : PsychicRitualToil_AnimaAffinity
             random = filteredMissingParts.RandomElement();
             curingMissingPart = true;
         }
-        else
+        else if (!otherPermanentHediffs.NullOrEmpty())
         {
             random = otherPermanentHediffs.RandomElement();
+        }
+        else
+        {
+            random = null;
         }
 
         if (curingMissingPart && Hediff_RegrowingPart.TryRemoveMissingFrom(targetPawn, random.Part))
@@ -83,12 +87,16 @@ public class PsychicRitualToil_Regrowth : PsychicRitualToil_AnimaAffinity
             Hediff_RegrowingPart regrow = (Hediff_RegrowingPart)HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_RegrowingPart, targetPawn, random.Part);
             targetPawn.health.hediffSet.AddDirect(regrow);
         }
-        else
+        else if (random != null)
         {
             HealthUtility.Cure(random);
         }
+        else
+        {
+            Messages.Message("TSOA_RegrowthRitualNoInjuryOnComplete".Translate(), MessageTypeDefOf.NeutralEvent);
+        }
             
-        if (!success)
+        if (!success && random != null)
         {
             GiveRandomCarcinoma(targetPawn);
         }
