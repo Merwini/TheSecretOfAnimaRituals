@@ -15,7 +15,7 @@ public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
 
     public override bool ExtraCellValidator(IntVec3 cell, Map map)
     {
-        return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin && cell.Standable(map);
+        return RelocateValidator(cell, map);
     }
 
     public override List<PsychicRitualToil> CreateToils(PsychicRitual psychicRitual, PsychicRitualGraph graph)
@@ -29,5 +29,10 @@ public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
     public override TaggedString OutcomeDescription(FloatRange qualityRange, string qualityNumber, PsychicRitualRoleAssignments assignments)
     {
         return outcomeDescription.Formatted(qualityRange.min.ToStringPercent());
+    }
+
+    public static bool RelocateValidator(IntVec3 cell, Map map)
+    {
+        return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin && cell.Standable(map);
     }
 }

@@ -51,14 +51,12 @@ public class PsychicRitualToil_Relocate : PsychicRitualToil_AnimaAffinity
         {
             Map map = ritualFocus.Map;
             IntVec3 destination;
-            if (failureRadius <= 0)
+            if (failureRadius <= 0 && PsychicRitualDef_Relocate.RelocateValidator(targetCell, map))
             {
                 destination = targetCell;
             }
             else if (CellFinder.TryFindRandomCellNear(targetCell, map, failureRadius,
-                cell =>
-                    map.fertilityGrid.FertilityAt(cell) > ThingDefOf.Plant_TreeAnima.plant.fertilityMin &&
-                    cell.Standable(map),
+                cell => PsychicRitualDef_Relocate.RelocateValidator(cell, map),
                 out IntVec3 result))
             {
                 destination = result;
@@ -66,15 +64,18 @@ public class PsychicRitualToil_Relocate : PsychicRitualToil_AnimaAffinity
             else
             {
                 destination = ritualFocus.Position;
-                Messages.Message("TSOA_RelocationNoMove".Translate(), MessageTypeDefOf.NegativeEvent);
             }
 
-        if (destination.IsValid)
+        if (destination.IsValid && destination != ritualFocus.Position)
         {
             EffecterDefOf.Skip_Entry.Spawn(ritualFocus.Position, map);
             EffecterDefOf.Skip_Exit.Spawn(destination, map);
             SkipUtility.SkipTo(ritualFocus, destination, map);
             Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), (failureRadius == 0 ? "TSOA_RelocateSuccess" : "TSOA_RelocateFailure").Translate(invoker, psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
+        }
+        else
+        {
+            Messages.Message("TSOA_RelocationNoMove".Translate(), MessageTypeDefOf.NegativeEvent);
         }
     }
 
