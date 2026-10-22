@@ -264,18 +264,18 @@ public class HarmonyPatches
 
         private static void CalculateGroupedFacilityQualityOffset(List<QualityFactor> powerFactorsOut, ref float power, ThingWithComps focus)
         {
-            CompAffectedByGroupedFacilities comp = focus.TryGetComp<CompAffectedByGroupedFacilities>();
+            CompAffectedByFacilities_Grouped comp = focus.TryGetComp<CompAffectedByFacilities_Grouped>();
             if (comp == null)
             {
                 return;
             }
 
             Dictionary<ThingDef, RitualQualityOffsetCount> dictionary = new Dictionary<ThingDef, RitualQualityOffsetCount>();
-            List<Thing> groupedFacilitiesListForReading = focus.GetComp<CompAffectedByGroupedFacilities>().LinkedFacilities;
+            List<Thing> groupedFacilitiesListForReading = focus.GetComp<CompAffectedByFacilities_Grouped>().LinkedFacilitiesListForReading;
             for (int i = 0; i < groupedFacilitiesListForReading.Count; i++)
             {
                 Thing thing = groupedFacilitiesListForReading[i];
-                CompGroupedFacility compGroupedFacility = thing.TryGetComp<CompGroupedFacility>();
+                CompFacility_Grouped compGroupedFacility = thing.TryGetComp<CompFacility_Grouped>();
                 if (compGroupedFacility?.StatOffsets == null || !compGroupedFacility.CanBeActive)
                 {
                     Log.Message("continue due to no comp, no StatOffsets, or not active");

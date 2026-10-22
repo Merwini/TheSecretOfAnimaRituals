@@ -4,7 +4,7 @@
 	<author>Nuff</author>
 	<packageId>tsoa.rituals</packageId>
 	<supportedVersions>
-		<li>1.6</li>
+		<li>1.7</li>
 	</supportedVersions>
 	<description>A mod in The Secret of Anima series adding new anima tree rituals, based on Anomaly's psychic rituals.</description>
 	<modDependencies>
