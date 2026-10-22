@@ -65,7 +65,7 @@ public class Hediff_RegrowingPart : HediffWithComps
                 if (TryRemoveMissingFrom(pawn, child))
                 {
                     Hediff_RegrowingPart regrow = (Hediff_RegrowingPart)HediffMaker.MakeHediff(def, pawn, child);
-                    pawn.health.hediffSet.AddDirect(regrow);
+                    pawn.health.AddHediff(regrow);
                 }
             }
         }

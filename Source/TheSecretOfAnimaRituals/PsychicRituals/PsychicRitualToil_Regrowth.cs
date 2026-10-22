@@ -85,7 +85,7 @@ public class PsychicRitualToil_Regrowth : PsychicRitualToil_AnimaAffinity
         {
 
             Hediff_RegrowingPart regrow = (Hediff_RegrowingPart)HediffMaker.MakeHediff(TSOAR_DefOf.TSOA_RegrowingPart, targetPawn, random.Part);
-            targetPawn.health.hediffSet.AddDirect(regrow);
+            targetPawn.health.AddHediff(regrow);
         }
         else if (random != null)
         {
