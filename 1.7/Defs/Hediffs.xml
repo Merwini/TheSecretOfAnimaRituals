@@ -30,7 +30,7 @@
 		</stages>
 		<comps>
 			<li Class="HediffCompProperties_SeverityPerDay">
-				<severityPerDay>-0.17</severityPerDay>
+				<severityPerDay>-0.1666</severityPerDay>
 				<showHoursToRecover>true</showHoursToRecover>
 			</li>
 		</comps>
@@ -44,6 +44,7 @@
 		<tendable>true</tendable>
 		<isBad>true</isBad>
 		<initialSeverity>0.0001</initialSeverity>
+		<minSeverity>0.0001</minSeverity>
 		<lethalSeverity>1.0</lethalSeverity>
 		<stages>
 			<li>
@@ -72,7 +73,6 @@
 	<HediffDef ParentName="TSOA_PsychicFeverBase">
 		<defName>TSOA_PsychicFever_Success</defName>
 		<label>psychic fever</label>
-		<minSeverity>0.0001</minSeverity>
 		<comps>
 			<li Class="tsoa.rituals.HediffCompProperties_PsychicFever">
 				<hoursToLethal>6</hoursToLethal>
@@ -103,6 +103,7 @@
 		<isBad>false</isBad>
 		<tendable>false</tendable>
 		<displayWound>false</displayWound>
+		<initialSeverity>0.0</initialSeverity>
 
 		<stages>
 			<li>
