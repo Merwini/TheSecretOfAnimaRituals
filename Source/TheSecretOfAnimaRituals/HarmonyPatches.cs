@@ -36,64 +36,59 @@ public class HarmonyPatches
     [HarmonyPatch(typeof(PsychicRitualGizmo))]
     public class PsychicRitualGizmo_GetGizmos_Patch
     {
-        static MethodBase TargetMethod()
+        private static readonly MethodInfo moveNext =
+        AccessTools.EnumeratorMoveNext(
+            AccessTools.Method(
+                typeof(PsychicRitualGizmo),
+                nameof(PsychicRitualGizmo.GetGizmos)));
+
+        static bool Prepare()
         {
-            Type outerType = typeof(PsychicRitualGizmo);
+            if (moveNext != null)
+                return true;
 
-            //var innerType = outerType
-            //    .GetNestedTypes(BindingFlags.NonPublic)
-            //    .First(t => t.Name.Contains("GetGizmos"));
-
-            Type innerType = AccessTools.Inner(outerType, "<GetGizmos>d__0");
-
-            //MethodInfo targetMethod = innerType
-            //    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-            //    .FirstOrDefault(m => m.Name.Contains("MoveNext"));
-
-            MethodInfo targetMethod = AccessTools.Method(innerType, "MoveNext");
-
-            return targetMethod;
+            Log.Error("[TSOA] Could not find GetGizmos iterator; skipping ritual filter patch.");
+            return false;
         }
 
-        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        static MethodBase TargetMethod() => moveNext;
+
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase __originalMethod)
         {
-            var codes = new List<CodeInstruction>(instructions);
+            var codes = instructions.ToList();
 
-            Type iteratorType = AccessTools.Inner(typeof(Verse.AI.Group.PsychicRitualGizmo), "<GetGizmos>d__0");
+            FieldInfo targetField = AccessTools.Field(__originalMethod.DeclaringType, "target");
 
-            FieldInfo targetField = AccessTools.Field(iteratorType, "target");
+            MethodInfo filterMethod = AccessTools.Method(typeof(HarmonyPatches), nameof(RitualTargetFilter));
 
-            MethodInfo filterMethod = typeof(HarmonyPatches).GetMethod("RitualTargetFilter", BindingFlags.Public | BindingFlags.Static);
+            MethodInfo orderBy = typeof(Enumerable).GetMethods()
+                .Single(m => m.Name == nameof(Enumerable.OrderBy)
+                    && m.IsGenericMethodDefinition
+                    && m.GetParameters().Length == 2)
+                .MakeGenericMethod(
+                    typeof(PsychicRitualDef_InvocationCircle),
+                    typeof(string));
 
-            int orderByIndex = -1;
-            int stlocIndex = -1;
+            List<int> matches = Enumerable.Range(0, codes.Count)
+                .Where(i => codes[i].Calls(orderBy))
+                .ToList();
 
-            for (int i = 0; i < codes.Count; i++)
+            if (targetField == null || targetField.IsStatic
+                || targetField.FieldType != typeof(Thing)
+                || filterMethod == null || matches.Count != 1)
             {
-                if (orderByIndex == -1 && codes[i].opcode == OpCodes.Call && codes[i].operand.ToString().Contains("OrderBy"))
-                {
-                    orderByIndex = i;
-                }
-
-                if (orderByIndex != -1 && codes[i].opcode == OpCodes.Stloc_2)
-                {
-                    stlocIndex = i;
-                    break;
-                }
+                Log.Error("[TSOA] GetGizmos IL did not match expectations; leaving it unchanged.");
+                return codes;
             }
 
-            List<CodeInstruction> newCodes = new List<CodeInstruction>()
+            codes.InsertRange(matches[0] + 1, new[]
             {
-                new CodeInstruction(OpCodes.Ldloc_2), // Load the unfiltered IOrderedEnumerable<PsychicRitualDef_InvocationCircle>
                 new CodeInstruction(OpCodes.Ldarg_0), // Load "this"
-                new CodeInstruction(OpCodes.Ldfld, targetField), // Load the target field from "this"
-                new CodeInstruction(OpCodes.Call, filterMethod), // Call the RitualTargetFilter method
-                new CodeInstruction(OpCodes.Stloc_2), // Store the filtered list IOrderedEnumerable<PsychicRitualDef_InvocationCircle>
-            };
+                new CodeInstruction(OpCodes.Ldfld, targetField), // Load the "target" field from "this"
+                new CodeInstruction(OpCodes.Call, filterMethod) // Call the RitualTargetFilter method
+            });
 
-            codes.InsertRange(stlocIndex + 1, newCodes);
-
-            return codes.AsEnumerable();
+            return codes;
         }
     }
     public static IOrderedEnumerable<PsychicRitualDef_InvocationCircle> RitualTargetFilter(IOrderedEnumerable<PsychicRitualDef_InvocationCircle> unfiltered, Thing target)
