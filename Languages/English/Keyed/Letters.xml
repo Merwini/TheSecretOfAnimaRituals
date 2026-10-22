@@ -20,8 +20,10 @@
 	<TSOA_BeckoningFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual, and called a hostile group instead. In a day or two, a raid will arrive.</TSOA_BeckoningFailure>
 	
 	<TSOA_EruptionSuccess>{0_nameDef} has completed performing the {RITUAL_definite} ritual successfully. Valuable minerals have been pulled to the surface.</TSOA_EruptionSuccess>
-	<TSOA_EruptionFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual, and an insectoid infestation has been brought to the surface along with the minerals.</TSOA_EruptionFailure>
+	<TSOA_EruptionFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual, and an insectoid infestation has been brought to the surface along with the minerals. The insectoids are guarding the minerals and will attack anyone who approaches.</TSOA_EruptionFailure>
+	<TSOA_EruptionNoOre>{0_nameDef} has completed performing the {RITUAL_definite} ritual, but no minerals could be brought to the surface.</TSOA_EruptionNoOre>
 
 	<TSOA_StormSuccess>{0_nameDef} has completed performing the {RITUAL_definite} ritual successfully. The weather has been changed to {1}.</TSOA_StormSuccess>
 	<TSOA_StormFailure>{0_nameDef} has failed at performing the {RITUAL_definite} ritual. The weather has been changed to {1}.</TSOA_StormFailure>
+
 </LanguageData>

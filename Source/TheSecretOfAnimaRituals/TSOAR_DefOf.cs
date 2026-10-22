@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI;
 using RimWorld;
 
 namespace tsoa.rituals;
@@ -12,6 +13,10 @@ namespace tsoa.rituals;
 public class TSOAR_DefOf
 {
     public static ThingDef PsychicRitualSpot;
+
+    public static ThingDef TSOA_EruptionTunnel;
+
+    public static DutyDef TSOA_DefendMinerals;
 
     public static HediffDef TSOA_AnimaAffinityHediff;
 

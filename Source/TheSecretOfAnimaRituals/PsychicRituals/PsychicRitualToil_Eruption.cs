@@ -1,9 +1,7 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
@@ -12,6 +10,9 @@ namespace tsoa.rituals;
 
 public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
 {
+    private const int MaxVeinAttempts = 100;
+    private const float InfestationSearchRadius = 2f;
+
     private PsychicRitualRoleDef invokerRole;
     private ThingDef chosenOreDef;
 
@@ -45,6 +46,8 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
 
     private void ApplyOutcome(PsychicRitual psychicRitual, Pawn invoker, bool success)
     {
+        Stopwatch timer = new Stopwatch();
+        timer.Start();
         if (chosenOreDef == null)
         {
             List<ThingDef> potentialOres = DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock).ToList();
@@ -52,48 +55,77 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
         }
 
         int oreAmount = chosenOreDef.building.mineableScatterLumpSizeRange.RandomInRange;
-        int oreSqrt = Mathf.RoundToInt((float)Math.Sqrt(oreAmount));
+        Map map = psychicRitual.Map;
 
-        Map map = invoker.Map;
+        if (!TryChooseVein(map, oreAmount, out IntVec3 chosenCell, out List<IntVec3> cells))
+        {
+            Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label),
+                "TSOA_EruptionNoOre".Translate(invoker, psychicRitual.def.Named("RITUAL")), LetterDefOf.NeutralEvent);
+            return;
+        }
 
-        IntVec3 chosenCell = ChooseCell(map, oreSqrt + 1);
-
-        List<Thing> spawnedOres = SpawnOreVein(oreAmount, map, chosenCell);
+        List<Thing> spawnedOres = SpawnOreVein(map, cells);
         SpawnFilthAround(spawnedOres);
 
         LetterDef textLetterDef;
         TaggedString text;
 
-        if (!success)
+        if (!success && SpawnInfestation(map, chosenCell, cells))
         {
             textLetterDef = LetterDefOf.NegativeEvent;
             text = "TSOA_EruptionFailure".Translate(invoker, psychicRitual.def.Named("RITUAL"));
-            SpawnInfestation(invoker, map, chosenCell);
         }
-        else
+        else // if infestation fails, player can have that success as a freebie
         {
             textLetterDef = LetterDefOf.PositiveEvent;
             text = "TSOA_EruptionSuccess".Translate(invoker, psychicRitual.def.Named("RITUAL"));
         }
 
         Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), text, textLetterDef, lookTargets: new LookTargets(chosenCell, map));
+        timer.Stop();
+        Log.Warning(timer.ElapsedMilliseconds.ToString());
     }
 
-    private void SpawnInfestation(Pawn invoker, Map map, IntVec3 chosenCell)
+    private bool SpawnInfestation(Map map, IntVec3 defendPoint, List<IntVec3> oreCells)
     {
-        IntVec3 intVec = CellFinder.FindNoWipeSpawnLocNear(chosenCell, map, ThingDefOf.TunnelHiveSpawner, Rot4.North, 2, (IntVec3 x) => x.Walkable(map) && x.GetFirstThing(map, chosenOreDef) == null && x.GetFirstThing(map, ThingDefOf.Hive) == null && x.GetFirstThing(map, ThingDefOf.TunnelHiveSpawner) == null);
-        TunnelHiveSpawner tunnelHiveSpawner = (TunnelHiveSpawner)ThingMaker.MakeThing(ThingDefOf.TunnelHiveSpawner);
+        HashSet<IntVec3> occupiedCells = new HashSet<IntVec3>(oreCells);
+        HashSet<IntVec3> candidates = new HashSet<IntVec3>();
+        foreach (IntVec3 oreCell in oreCells)
+        {
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(oreCell, InfestationSearchRadius, false))
+            {
+                if (!occupiedCells.Contains(cell) && IsValid(cell, map) && cell.Standable(map)
+                    && cell.GetEdifice(map) == null
+                    && cell.GetFirstThing(map, ThingDefOf.Hive) == null
+                    && !cell.GetThingList(map).Any(thing => thing is TunnelHiveSpawner))
+                {
+                    candidates.Add(cell);
+                }
+            }
+        }
+
+        if (!candidates.TryRandomElement(out IntVec3 spawnCell))
+            return false;
+
+        TunnelHiveSpawner_Eruption tunnelHiveSpawner = (TunnelHiveSpawner_Eruption)ThingMaker.MakeThing(TSOAR_DefOf.TSOA_EruptionTunnel);
+        tunnelHiveSpawner.defendPoint = defendPoint;
         tunnelHiveSpawner.spawnHive = false;
-        tunnelHiveSpawner.insectsPoints = Mathf.Clamp(StorytellerUtility.DefaultThreatPointsNow(invoker.Map) * Rand.Range(0.3f, 0.6f), 200f, 1000f);
+        tunnelHiveSpawner.insectsPoints = Mathf.Clamp(StorytellerUtility.DefaultThreatPointsNow(map) * Rand.Range(0.3f, 0.6f), 200f, 1000f);
         tunnelHiveSpawner.spawnedByInfestationThingComp = true;
-        GenSpawn.Spawn(tunnelHiveSpawner, intVec, map, WipeMode.FullRefund);
+        GenSpawn.Spawn(tunnelHiveSpawner, spawnCell, map, WipeMode.FullRefund);
+        return true;
     }
 
-    private List<Thing> SpawnOreVein(int oreAmount, Map map, IntVec3 chosenCell)
+    private List<Thing> SpawnOreVein(Map map, List<IntVec3> cells)
     {
         List<Thing> spawnedOres = new List<Thing>();
-        foreach (IntVec3 cell in GridShapeMaker.IrregularLump(chosenCell, map, oreAmount, (IntVec3 c) => IsValid(c, map)))
+        foreach (IntVec3 cell in cells)
         {
+            foreach (Plant plant in cell.GetThingList(map).OfType<Plant>().ToList())
+            {
+                plant.Destroy(DestroyMode.Vanish);
+            }
+
             spawnedOres.Add(GenSpawn.Spawn(chosenOreDef, cell, map));
         }
         return spawnedOres;
@@ -114,27 +146,44 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
         }
     }
 
-    private IntVec3 ChooseCell(Map map, int size)
+    private bool TryChooseVein(Map map, int oreAmount, out IntVec3 chosenCell, out List<IntVec3> cells)
     {
-        IntVec3 randomCell = CellFinder.RandomCell(map); 
-        if (DropCellFinder.TryFindDropSpotNear(randomCell, map, out IntVec3 result, true, true, false, new IntVec2(size, size), false))
+        chosenCell = IntVec3.Invalid;
+        cells = null;
+        if (oreAmount <= 0)
+            return false;
+
+        List<IntVec3> candidates = map.AllCells.Where(c => IsValid(c, map)).ToList();
+        candidates.Shuffle();
+        foreach (IntVec3 center in candidates.Take(MaxVeinAttempts))
         {
-            return result;
+            List<IntVec3> proposed = GridShapeMaker.IrregularLump(center, map, oreAmount, c => IsValid(c, map));
+            if (proposed.Count != oreAmount)
+                continue;
+
+            chosenCell = center;
+            cells = proposed;
+            return true;
         }
-        else
-        {
-            return randomCell;
-        }
+
+        return false;
     }
 
-    // TODO might need more validators, will have to try it some and see if it does anything weird
-    bool IsValid(IntVec3 c, Map map)
+    private bool IsValid(IntVec3 c, Map map)
     {
         if (!c.InBounds(map))
             return false;
 
-        if (!c.Standable(map))
+        TerrainDef terrain = c.GetTerrain(map);
+        if (terrain == null || terrain.passability == Traversability.Impassable)
             return false;
+
+        // Plants will be cleared when the vein is spawned; other obstructions still block it.
+        foreach (Thing thing in c.GetThingList(map))
+        {
+            if (thing is not Plant && thing.def.passability != Traversability.Standable)
+                return false;
+        }
 
         if (c.Fogged(map))
             return false;
@@ -142,7 +191,7 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
         if (c.Roofed(map))
             return false;
 
-        if (!c.GetRoom(map).PsychologicallyOutdoors)
+        if (c.GetRoom(map)?.PsychologicallyOutdoors != true)
             return false;
 
         return true;
