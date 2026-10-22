@@ -66,14 +66,15 @@ public class PsychicRitualDef_Eruption : PsychicRitualDef_Unlocked
         return oreDict.TryGetValue(chosen);
     }
 
-    public override void PostLoad()
+    public override void ResolveReferences()
     {
-        base.PostLoad();
-
         oreDict.Clear();
-        foreach (var ore in DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock))
+        IEnumerable<ThingDef> ores = DefDatabase<ThingDef>.AllDefs.Where(td => td.building?.isResourceRock == true);
+        foreach (var ore in ores)
         {
             string optionLabel = ore.label;
+
+            // for if multiple ore ThingDefs have the same label; increment the optionLabel until it is unique
             int suffix = 2;
             while (oreDict.ContainsKey(optionLabel) || optionLabel == anyOreOptionString)
             {
@@ -82,5 +83,7 @@ public class PsychicRitualDef_Eruption : PsychicRitualDef_Unlocked
 
             oreDict[optionLabel] = ore;
         }
+
+        base.ResolveReferences();
     }
 }

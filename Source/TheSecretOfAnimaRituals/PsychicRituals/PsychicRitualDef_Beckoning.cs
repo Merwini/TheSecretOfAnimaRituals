@@ -91,14 +91,17 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
         return traderDict.TryGetValue(chosen);
     }
 
-    public override void PostLoad()
+    public override void ResolveReferences()
     {
-        base.PostLoad();
-
         traderDict.Clear();
         foreach (var kind in DefDatabase<TraderKindDef>.AllDefs)
         {
+            if (kind.label.NullOrEmpty())
+                continue;
+
             string optionLabel = kind.label;
+
+            // for if multiple ore ThingDefs have the same label; increment the optionLabel until it is unique
             int suffix = 2;
             while (traderDict.ContainsKey(optionLabel) || optionLabel == anyTraderOptionString)
             {
@@ -107,6 +110,8 @@ public class PsychicRitualDef_Beckoning : PsychicRitualDef_Unlocked
 
             traderDict[optionLabel] = kind;
         }
+
+        base.ResolveReferences();
     }
 
     public static List<Faction> GetFactionsThatCanSendTraderKind(Map map, TraderKindDef chosenKind)
