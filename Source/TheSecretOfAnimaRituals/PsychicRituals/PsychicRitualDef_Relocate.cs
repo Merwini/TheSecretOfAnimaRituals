@@ -33,6 +33,6 @@ public class PsychicRitualDef_Relocate : PsychicRitualDef_Unlocked
 
     public static bool RelocateValidator(IntVec3 cell, Map map)
     {
-        return map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin && cell.Standable(map);
+        return map != null & cell.InBounds(map) && map.fertilityGrid.FertilityAt(cell) >= ThingDefOf.Plant_TreeAnima.plant.fertilityMin && cell.Standable(map);
     }
 }
