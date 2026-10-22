@@ -15,7 +15,7 @@ public class HediffCompProperties_PsychicFever : HediffCompProperties
     public float severityAfterTend = 0f;
 
     public float durationDays = -1f;
-    public FloatRange durationDaysRandom = FloatRange.Zero;
+    public FloatRange durationDaysRange;
 
     public HediffCompProperties_PsychicFever()
     {

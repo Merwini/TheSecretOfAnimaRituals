@@ -69,7 +69,7 @@ public class PsychicRitualToil_Fever : PsychicRitualToil_AnimaAffinity
         }
         else
         {
-            FloatRange failureDurationDays = TSOAR_DefOf.TSOA_PsychicFever_Failure.CompProps<HediffCompProperties_PsychicFever>().durationDaysRandom;
+            FloatRange failureDurationDays = TSOAR_DefOf.TSOA_PsychicFever_Failure.CompProps<HediffCompProperties_PsychicFever>().durationDaysRange;
             durationDays = failureDurationDays.ToString();
         }
 

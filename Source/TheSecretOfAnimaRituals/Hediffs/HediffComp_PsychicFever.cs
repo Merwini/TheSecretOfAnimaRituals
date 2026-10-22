@@ -15,46 +15,33 @@ public class HediffComp_PsychicFever : HediffComp
 
     public HediffCompProperties_PsychicFever Props => (HediffCompProperties_PsychicFever)props;
 
+    public override bool CompShouldRemove => ticksRemaining <= 0;
+
+    private float severityPerTick;
+
     public override void CompPostMake()
     {
         base.CompPostMake();
-        InitializeDurationIfNeeded();
-    }
-
-    public override void CompPostPostAdd(DamageInfo? dinfo)
-    {
-        base.CompPostPostAdd(dinfo);
-        InitializeDurationIfNeeded();
-    }
-
-    private void InitializeDurationIfNeeded()
-    {
-        if (ticksRemaining >= 0)
-            return;
-
-        float days = Props.durationDays > 0f ? Props.durationDays : (Props.durationDaysRandom.TrueMin > 0f ? Props.durationDaysRandom.RandomInRange : 2f);
-
+        
+        float days = Props.durationDays > 0f ? Props.durationDays : (Props.durationDaysRange.TrueMin > 0f ? Props.durationDaysRange.RandomInRange : 2f);
         ticksRemaining = Mathf.Max(1, Mathf.RoundToInt(days * GenDate.TicksPerDay));
+
+        int ticksToLethal = (int)(Props.hoursToLethal * GenDate.TicksPerHour);
+        severityPerTick = 1f / ticksToLethal;
     }
 
     public override void CompPostTick(ref float severityAdjustment)
     {
-        base.CompPostTick(ref severityAdjustment);
-
-        if (ticksRemaining > 0)
+        ticksRemaining--;
+        if (ticksRemaining <= 0)
         {
-            ticksRemaining--;
-            if (ticksRemaining == 0)
-            {
-                Pawn.health.RemoveHediff(parent);
-                return;
-            }
+            Pawn.health.RemoveHediff(parent);
+            return;
         }
 
-        float ticksToLethal = Mathf.Max(1f, Props.hoursToLethal * GenDate.TicksPerHour);
-        float perTick = 1f / ticksToLethal;
+        severityAdjustment += severityPerTick;
 
-        severityAdjustment += perTick;
+        base.CompPostTick(ref severityAdjustment);
     }
 
     public override void CompTended(float quality, float maxQuality, int batchPosition = 0)
@@ -79,6 +66,7 @@ public class HediffComp_PsychicFever : HediffComp
     {
         base.CompExposeData();
         Scribe_Values.Look(ref ticksRemaining, "ticksRemaining", -1);
+        Scribe_Values.Look(ref severityPerTick, "severityPerTick", 1f/15000f);
     }
 
 }

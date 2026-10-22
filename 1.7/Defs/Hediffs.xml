@@ -72,10 +72,11 @@
 	<HediffDef ParentName="TSOA_PsychicFeverBase">
 		<defName>TSOA_PsychicFever_Success</defName>
 		<label>psychic fever</label>
+		<minSeverity>0.0001</minSeverity>
 		<comps>
 			<li Class="tsoa.rituals.HediffCompProperties_PsychicFever">
 				<hoursToLethal>6</hoursToLethal>
-				<severityAfterTend>0</severityAfterTend>
+				<severityAfterTend>0.0001</severityAfterTend>
 				<durationDays>2</durationDays>
 			</li>
 		</comps>
@@ -87,8 +88,8 @@
 		<comps>
 			<li Class="tsoa.rituals.HediffCompProperties_PsychicFever">
 				<hoursToLethal>6</hoursToLethal>
-				<severityAfterTend>0</severityAfterTend>
-				<durationDaysRandom>4~6</durationDaysRandom>
+				<severityAfterTend>0.0001</severityAfterTend>
+				<durationDaysRange>4~6</durationDaysRange>
 			</li>
 		</comps>
 	</HediffDef>
