@@ -28,7 +28,7 @@ public class PsychicRitualToil_Storm : PsychicRitualToil_AnimaAffinity
         Pawn pawn = psychicRitual.assignments.FirstAssignedPawn(invokerRole);
         // Can you have multiples of the same game condition? Probably? Best to let it account for multiples
         // Want to re-gather these here instead of passing from def, in case anything has changed in between
-        List<GameCondition> droughts = pawn.Map.GameConditionManager.ActiveConditions.Where(gc => gc.def.defName == "Drought").ToList();
+        List<GameCondition> droughts = psychicRitual.Map.GameConditionManager.ActiveConditions.Where(gc => gc.def.defName == "Drought").ToList();
         bool positiveOutcome = Rand.Chance(((PsychicRitualDef_Storm)psychicRitual.def).successCurve.Evaluate(psychicRitual.PowerPercent) * (droughts.NullOrEmpty() ? 1f : 0.5f));
         psychicRitual.ReleaseAllPawnsAndBuildings();
         if (pawn != null)
