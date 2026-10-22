@@ -273,7 +273,6 @@ public class HarmonyPatches
                 CompFacility_Grouped compGroupedFacility = thing.TryGetComp<CompFacility_Grouped>();
                 if (compGroupedFacility?.StatOffsets == null || !compGroupedFacility.CanBeActive)
                 {
-                    Log.Message("continue due to no comp, no StatOffsets, or not active");
                     continue;
                 }
                 for (int j = 0; j < compGroupedFacility.StatOffsets.Count; j++)

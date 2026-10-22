@@ -182,7 +182,7 @@
 	<tsoa.rituals.PsychicRitualDef_Regrowth>
 		<defName>TSOA_RegrowthRitual</defName>
 		<label>somatic regrowth</label>
-		<description>Induces the target's body to begin regrowing a lost or permanently damaged body part. The body part will regrow over a period of days or weeks. The invoker will attempt to control the growth, but if the ritual goes wrong it may induce uncontrolled growth in another part of the body, resulting in a carcinoma.</description>
+		<description>Induces the target's body to begin regrowing a lost or permanently damaged body part. A missing body part will regrow over a period of days or weeks, or an injury will be healed immediately. The invoker will attempt to control the growth, but if the ritual goes wrong it may induce uncontrolled growth in another part of the body, resulting in a carcinoma.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
 		<iconPath>TSOA/UI/Gizmos/RegrowthRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_RegrowthResearch</researchPrerequisite>
