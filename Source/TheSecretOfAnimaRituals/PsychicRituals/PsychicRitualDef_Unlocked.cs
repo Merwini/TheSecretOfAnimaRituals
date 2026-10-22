@@ -53,17 +53,17 @@ public class PsychicRitualDef_Unlocked : PsychicRitualDef_InvocationCircle
         if (ritualFocuses.NullOrEmpty())
         {
             ritualFocuses = new List<ThingDef>();
-            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
+            Log.Error($"[TSOA] Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has no list of ritual focuses.");
         }
 
         if ((targetsCell && targetsPawn) || (targetsCell && targetsThingOfDef != null) || (targetsPawn && targetsThingOfDef != null))
         {
-            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
+            Log.Error($"[TSOA] Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked but has multiple target types set.");
         }
 
         if (gizmoMakesFloatMenu && (targetsCell || targetsPawn || targetsThingOfDef != null))
         {
-            Log.Error($"Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked and is configured to make a float menu AND target something.");
+            Log.Error($"[TSOA] Config error in {defName} from {modContentPack.Name}. Using class PsychicRitualDef_LocationUnlocked and is configured to make a float menu AND target something.");
         }
 
         base.ResolveReferences();
