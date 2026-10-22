@@ -32,10 +32,10 @@ public class Building_RootGraveRitualized : Building_RootGrave
         {
             if (mapComp == null || mapComp.hungryGraveEndTick <= Find.TickManager.TicksGame)
             {
-                return ProgressPerTick;
+                return 1;
             }
 
-            return ProgressPerTick * hungryGraveConsumeMult;
+            return hungryGraveConsumeMult;
         }
     }
 }
