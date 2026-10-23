@@ -35,9 +35,9 @@
 
 	<tsoa.rituals.PsychicRitualDef_FlowerPower>
 		<defName>TSOA_FlowerPowerRitual</defName>
-		<label>flower empowerment</label>
+		<label>flower endowment</label>
 		<description>Temporarily empowers anima flowers on the map to manipulate energy around them, heating or cooling the room they are in to bring it closer to comfortable levels for humans. The temperature change is greater depending on ritual quality, and adding additional flowers to a room increases the effect.</description>
-		<!--<iconPath>TSOA/UI/Gizmos/RelocationRitualGizmo</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/FlowerEmpowermentRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -69,7 +69,7 @@
 		<defName>TSOA_HungryGraveRitual</defName>
 		<label>hungry grave</label>
 		<description>Temporarily empowers anima root graves on the map to consume corpses significantly faster. The duration is longer depending on ritual quality.</description>
-		<!--<iconPath>TSOA/UI/Gizmos/RelocationRitualGizmo</iconPath>-->
+		<iconPath>TSOA/UI/Gizmos/HungryGraveRitualGizmo</iconPath>
 		<researchPrerequisite>TSOA_AnimaOne</researchPrerequisite>
 		<hoursUntilOutcome>1</hoursUntilOutcome>
 		<castableOnPocketMaps>true</castableOnPocketMaps>
@@ -212,7 +212,7 @@
 
 	<tsoa.rituals.PsychicRitualDef_Beckoning>
 		<defName>TSOA_BeckoningRitual</defName>
-		<label>psychic beckoning</label>
+		<label>beckoning</label>
 		<description>Psychically beckons across great distances, trying to influence a trader to visit your colony. With additional research and increased difficulty, you can even choose what kind of trader it will be that receives the beckoning. However, if the ritual is unsuccessful, it will be a group that means to do you harm, instead.</description>
 		<outcomeDescription>At the current ritual quality, the chance of success is {0}.</outcomeDescription>
 		<iconPath>TSOA/UI/Gizmos/BeckoningRitualGizmo</iconPath>
@@ -320,7 +320,7 @@
 
 	<tsoa.rituals.PsychicRitualDef_Animagenesis>
 		<defName>TSOA_AnimagenesisRitual</defName>
-		<label>animagenesis</label>
+		<label>genesis</label>
 		<description>Sacrifice a colonist with high affinity to the anima tree to create the seed of a new tree. A high quality ritual will also create a psychic soothe, to ameliorate the pain of losing a friend.</description>
 		<outcomeDescription>There is no chance of failure.</outcomeDescription>
 		<iconPath>TSOA/UI/Gizmos/AnimagenesisRitualGizmo</iconPath>
