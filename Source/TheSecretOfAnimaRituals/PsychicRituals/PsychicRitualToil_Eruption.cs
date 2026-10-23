@@ -46,8 +46,6 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
 
     private void ApplyOutcome(PsychicRitual psychicRitual, Pawn invoker, bool success)
     {
-        Stopwatch timer = new Stopwatch();
-        timer.Start();
         if (chosenOreDef == null)
         {
             List<ThingDef> potentialOres = DefDatabase<ThingDef>.AllDefs.Where(td => td.building != null && td.building.isResourceRock).ToList();
@@ -82,8 +80,6 @@ public class PsychicRitualToil_Eruption : PsychicRitualToil_AnimaAffinity
         }
 
         Find.LetterStack.ReceiveLetter("PsychicRitualCompleteLabel".Translate(psychicRitual.def.label), text, textLetterDef, lookTargets: new LookTargets(chosenCell, map));
-        timer.Stop();
-        Log.Warning(timer.ElapsedMilliseconds.ToString());
     }
 
     private bool SpawnInfestation(Map map, IntVec3 defendPoint, List<IntVec3> oreCells)
