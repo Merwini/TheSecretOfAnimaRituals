@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI.Group;
+using tsoa.core;
 
 namespace tsoa.rituals;
 

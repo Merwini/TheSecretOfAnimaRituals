@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Verse.AI.Group;
 using Verse;
 using RimWorld;
+using tsoa.core;
 
 namespace tsoa.rituals;
 

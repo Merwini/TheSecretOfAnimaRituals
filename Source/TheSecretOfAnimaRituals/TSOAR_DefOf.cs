@@ -18,8 +18,6 @@ public class TSOAR_DefOf
 
     public static DutyDef TSOA_DefendMinerals;
 
-    public static HediffDef TSOA_AnimaAffinityHediff;
-
     public static HediffDef TSOA_PsychicSevering;
 
     public static HediffDef TSOA_PsychicFever_Success;
