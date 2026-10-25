@@ -131,6 +131,60 @@
 		<researchViewY>1.40</researchViewY>
 	</ResearchProjectDef>
 	
-	
+	<ResearchProjectDef>
+		<defName>TSOA_RitualPlaceholderOne</defName>
+		<label>coming soon(ish)</label>
+		<description>Planned future content.</description>
+		<baseCost>99999</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_ArchotechOne</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>0</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>TSOA_RitualPlaceholderTwo</defName>
+		<label>coming soon(ish)</label>
+		<description>Planned future content.</description>
+		<baseCost>99999</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_ArchotechOne</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>0</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>TSOA_RitualPlaceholderThree</defName>
+		<label>coming soon(ish)</label>
+		<description>Planned future content.</description>
+		<baseCost>99999</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_ArchotechOne</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>0</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>TSOA_RitualPlaceholderFour</defName>
+		<label>coming soon(ish)</label>
+		<description>Planned future content.</description>
+		<baseCost>99999</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>TSOA_ArchotechOne</li>
+		</prerequisites>
+		<tab>TSOA_ResearchTab</tab>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>2.10</researchViewY>
+	</ResearchProjectDef>
 	
 </Defs>
