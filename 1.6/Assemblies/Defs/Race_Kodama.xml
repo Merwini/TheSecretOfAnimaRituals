@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- <BodyDef>
+		<defName>TSOA_KodamaBody</defName>
+		<label>kodama</label>
+		<corePart>
+			<def>Body</def>
+			<height>Middle</height>
+			<depth>Outside</depth>
+			<parts>
+				<li>
+					<def>TSOA_KodamaShell</def>
+					<coverage>0.75</coverage>
+					<depth>Outside</depth>
+					<groups>
+						<li>TSOA_KodamaWholeBody</li>
+					</groups>
+				</li>
+				<li>
+					<def>TSOA_KodamaCore</def>
+					<coverage>0.15</coverage>
+					<depth>Outside</depth>
+					<groups>
+						<li>TSOA_KodamaWholeBody</li>
+					</groups>
+				</li>
+			</parts>
+		</corePart>
+	</BodyDef>
+
+	<BodyPartDef>
+		<defName>TSOA_KodamaCore</defName>
+		<label>core</label>
+		<hitPoints>30</hitPoints>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+		<tags>
+			<li>ManipulationLimbCore</li>
+			<li>MovingLimbCore</li>
+			<li>SightSource</li>
+			<li>HearingSource</li>
+			<li>EatingSource</li>
+			<li>TalkingSource</li>
+			<li>ConsciousnessSource</li>
+			<li>BloodPumpingSource</li>
+			<li>BloodFiltrationSource</li>
+			<li>MetabolismSource</li>
+			<li>BreathingSource</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>TSOA_KodamaShell</defName>
+		<label>leaves</label>
+		<hitPoints>20</hitPoints>
+		<solid>false</solid>
+		<frostbiteVulnerability>0.5</frostbiteVulnerability>
+	</BodyPartDef>
+
+	<BodyPartGroupDef>
+		<defName>TSOA_KodamaWholeBody</defName>
+		<label>body</label>
+		<labelShort>body</labelShort>
+	</BodyPartGroupDef>
+
+	<ThingDef ParentName="BasePawn" Abstract="True" Name="TSOA_KodamaRaceBase">
+		<label>kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. Has a limited lifespan before the energy animating it dissipates.</description>
+		<statBases>
+			<MoveSpeed>5.9</MoveSpeed>
+			<Flammability>0.75</Flammability>
+			<ToxicResistance>1</ToxicResistance>
+			<PsychicSensitivity>0</PsychicSensitivity>
+			<PainShockThreshold>0.8</PainShockThreshold>
+			<MentalBreakThreshold>0</MentalBreakThreshold>
+			<WorkSpeedGlobal>1.0</WorkSpeedGlobal>
+			<LeatherAmount>0</LeatherAmount>
+			<MeatAmount>0</MeatAmount>
+			<SocialImpact>0</SocialImpact>
+			<GlobalLearningFactor>0</GlobalLearningFactor>
+			<ComfyTemperatureMin>-60</ComfyTemperatureMin>
+			<ComfyTemperatureMax>60</ComfyTemperatureMax>
+			<ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.10</ArmorRating_Heat>
+			<CarryingCapacity>65.0</CarryingCapacity>
+			<Mass>10.0</Mass>
+			<VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1.0</VacuumResistance>
+		</statBases>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<trainability>None</trainability>
+			<needsRest>false</needsRest>
+			<body>TSOA_KodamaBody</body>
+			<thinkTreeConstant>TSOA_KodamaConstant</thinkTreeConstant>
+			<baseBodySize>0.6</baseBodySize>
+			<hasGenders>false</hasGenders>
+			<bloodDef>Filth_Ash</bloodDef>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>TSOA_KodamaWounded</soundWounded>
+					<soundDeath>TSOA_KodamaDeath</soundDeath>
+					<soundCall>TSOA_KodamaCall</soundCall>
+				</li>
+			</lifeStageAges>
+		</race>
+		<tools>
+			<li>
+				<label>body</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>5</power>
+				<cooldownTime>2.9</cooldownTime>
+				<linkedBodyPartsGroup>TSOA_KodamaWholeBody</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+	</ThingDef>
+
+	<PawnKindDef ParentName="AnimalKindBase" Abstract="True" Name="TSOA_KodamaKindBase">
+		<combatPower>10</combatPower>
+		<ecoSystemWeight>0</ecoSystemWeight>
+		<canArriveManhunter>false</canArriveManhunter>
+		<alternateGraphicChance>0.6</alternateGraphicChance>
+		<alternateGraphics>
+			<li>
+				<texPath>TSOA/Things/Pawn/Kodama/Kodama2</texPath>
+			</li>
+			<li>
+				<texPath>TSOA/Things/Pawn/Kodama/Kodama3</texPath>
+			</li>
+		</alternateGraphics>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>TSOA/Things/Pawn/Kodama/Kodama</texPath>
+					<drawSize>1.5</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef> -->
+
+	<!-- Hauler -->
+
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaHaulerRace</defName>
+		<label>hauling kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaHaulerMain</thinkTreeMain>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaHaulerKind</defName>
+		<label>hauling kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, hauling. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaHaulerRace</race>
+	</PawnKindDef> -->
+
+	<!-- Cleaner -->
+
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaCleanerRace</defName>
+		<label>cleaning kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaCleanerMain</thinkTreeMain>
+		</race>
+	</ThingDef>
+	
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaCleanerKind</defName>
+		<label>cleaning kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, cleaning. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaCleanerRace</race>
+	</PawnKindDef> -->
+
+	<!-- Cutter -->
+
+	<!-- <ThingDef ParentName="TSOA_KodamaRaceBase">
+		<defName>TSOA_KodamaCutterRace</defName>
+		<label>cutting kodama</label>
+		<race>
+			<thinkTreeMain>TSOA_KodamaCutterMain</thinkTreeMain>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="TSOA_KodamaKindBase">
+		<defName>TSOA_KodamaCutterKind</defName>
+		<label>cutting kodama</label>
+		<description>A small bundle of anima tree leaves, psychically animated to perform simple tasks. In this case, plant cutting. Has a limited lifespan before the energy animating it dissipates.</description>
+		<race>TSOA_KodamaCutterRace</race>
+	</PawnKindDef> -->
+	
+</Defs>

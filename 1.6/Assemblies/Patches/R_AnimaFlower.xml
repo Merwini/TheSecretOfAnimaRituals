@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="TSOA_Plant_AnimaFlower"]/comps//li[@Class="tsoa.core.CompProperties_BiHeatPusher"]</xpath>
+		<value>
+			<compClass>tsoa.rituals.CompBiHeatPusherRitualized</compClass>
+		</value>
+	</Operation>
+	
+</Patch>
