@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using tsoa.core;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 using RimWorld;
 using static RimWorld.PsychicRitualDef_InvocationCircle;
@@ -304,6 +305,94 @@ public class HarmonyPatches
                 });
                 power += item.Value.offset;
             }
+        }
+    }
+
+    [HarmonyPatch( typeof(PsychicRitualDef_InvocationCircle), nameof(PsychicRitualDef_InvocationCircle.GenerateRolePositions))]
+    public static class PsychicRitualDef_InvocationCircle_GenerateRolePositions_Postfix
+    {
+        public static void Postfix(PsychicRitualDef_InvocationCircle __instance, PsychicRitualRoleAssignments assignments, ref IReadOnlyDictionary<PsychicRitualRoleDef, List<IntVec3>> __result)
+        {
+            if (__instance is not PsychicRitualDef_Unlocked)
+                return;
+
+            Map map = assignments.Target.Map;
+            IntVec3 ritualFocus = assignments.Target.Cell;
+
+            if (map == null || __result == null)
+                return;
+
+            Pawn invoker = assignments.FirstAssignedPawn(__instance.InvokerRole);
+
+            HashSet<IntVec3> alreadyUsedCells = new();
+            Dictionary<PsychicRitualRoleDef, List<IntVec3>> newDict = new();
+
+            // Will find a spot for the invoker(s) first, then target(s), then everyone else.
+            var roles = __result.Keys.OrderBy(role =>
+                role == __instance.InvokerRole ? 0 :
+                role == __instance.TargetRole ? 1 : 2);
+
+            foreach (PsychicRitualRoleDef role in roles)
+            {
+                List<Pawn> pawns = assignments.AssignedPawns(role).ToList();
+                List<IntVec3> originalCells = __result[role];
+                List<IntVec3> positions = new(originalCells.Count);
+
+                if (pawns.Count != originalCells.Count)
+                {
+                    Log.Error($"[TSOA] Role position count mismatch for {__instance.defName} role {role.defName}.");
+                    return;
+                }
+
+                for (int i = 0; i < pawns.Count; i++)
+                {
+                    Pawn pawn = pawns[i];
+
+                    // A downed or imprisoned pawn might be being carried by the invoker
+                    Pawn movingPawn = role == __instance.TargetRole
+                        && (pawn.Downed || pawn.IsPrisoner)
+                            ? invoker
+                            : pawn;
+
+                    bool Valid(IntVec3 cell) =>
+                        cell.InBounds(map)
+                        && cell != ritualFocus
+                        && !alreadyUsedCells.Contains(cell)
+                        && cell.Standable(map)
+                        && movingPawn != null
+                        && movingPawn.Map == map
+                        && movingPawn.CanReach(
+                            cell, PathEndMode.OnCell, Danger.Deadly);
+
+                    // Start the search at the original position if it's a valid IntVec3, otherwise start at the ritual focus
+                    IntVec3 preferredCell = originalCells[i].IsValid
+                        ? originalCells[i]
+                        : ritualFocus;
+
+                    // Find a good cell in a small radius near the preferredCell
+                    IntVec3 chosenCell = CellFinder.StandableCellNear(preferredCell, map, 3f, Valid);
+
+                    // If we failed to find one above, try a larger radius around the ritual focus
+                    if (!chosenCell.IsValid)
+                    {
+                        chosenCell = CellFinder.StandableCellNear(ritualFocus, map, __instance.invocationCircleRadius + 2f, Valid);
+                    }
+
+                    if (!chosenCell.IsValid)
+                    {
+                        Log.Error($"[TSOA] No accessible ritual position for " + $"{pawn.LabelShort} in {__instance.defName}.");
+                        // TODO see how likely it is to get complete failure, see if I need even more failure handling
+                        return;
+                    }
+
+                    positions.Add(chosenCell);
+                    alreadyUsedCells.Add(chosenCell);
+                }
+
+                newDict.Add(role, positions);
+            }
+
+            __result = newDict;
         }
     }
 }
