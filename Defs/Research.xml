@@ -47,7 +47,7 @@
 	<ResearchProjectDef>
 		<defName>TSOA_FeverResearch</defName>
 		<label>fever ritual</label>
-		<description>Perform a psychic ritual that induces a psychic fever in the targets. The fever rapidly helps rapidly cure disease, but requires frequent medical tending or the target will die.</description>
+		<description>Perform a psychic ritual that induces a psychic fever in the targets. The fever helps rapidly cure disease, but requires frequent medical tending or the target will die.</description>
 		<baseCost>600</baseCost>
 		<techLevel>Neolithic</techLevel>
 		<prerequisites>
